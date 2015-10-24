@@ -1,3 +1,8 @@
 <% if notice %>
-  <p class="alert alert-success" role="alert" style="margin-top: 10px"><%= notice %></p>
+  <p class="alert alert-success" role="alert" style="margin-top: 10px">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </p>
 <% end %>
