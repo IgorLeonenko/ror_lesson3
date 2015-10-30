@@ -21,7 +21,7 @@
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
 
-      <% if params[:action] == 'edit' %>
+      <% if params[:action] == 'edit' || params[:action] == 'update' %>
         <div class="form-group">
           <%= f.label :current_password, class: 'control-label' %><br>
           <%= f.password_field :current_password, class: 'form-control' %>
@@ -29,7 +29,8 @@
       <% end %>
       <div class="col-md-4"></div>
       <div class="col-md-4">
-        <%= f.submit "#{params[:action] == 'new' || 'create' ? 'Sign Up' : 'Update'}", class: "btn btn-primary" %>
+        <%= f.submit "#{params[:action] == 'new' || params[:action] =='create' ? 'Sign Up' : 'Update'}",
+            class: "btn btn-primary" %>
       </div>
       <div class="col-md-4"></div>
     <% end %>

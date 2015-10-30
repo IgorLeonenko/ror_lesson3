@@ -1,19 +1,19 @@
 <div class="form-group">
-  <%= f.label :title %><br>
+  <%= f.label :title, class: 'control-label' %><br>
   <%= f.text_field :title, class: "form-control" %>
 </div>
 <div class="form-group">
-  <%= f.label :body %><br>
+  <%= f.label :body, class: 'control-label' %><br>
   <%= f.text_area :body, class: "form-control" %>
 </div>
 <div class="form-group">
-  <%= f.label :tags %><br>
+  <%= f.label :tags, class: 'control-label' %><br>
   <%= f.text_field :tags, class: "form-control" %>
 </div>
 <%= f.hidden_field :user_id, :value => params[:user_id] %>
 
 <div class="col-md-4"></div>
   <div class="col-md-4">
-    <%= f.submit "#{params[:action] == 'new' || 'create' ? 'Create post' : 'Edit post'}", class: "btn btn-success" %>
+    <%= f.submit "#{params[:action] == 'new' || 'create' ? 'Create post' : 'Update post'}", class: "btn btn-success" %>
   </div>
 <div class="col-md-4"></div>

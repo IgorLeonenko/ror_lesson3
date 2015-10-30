@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update]
   skip_before_action :authorization, only: [:new, :create]
 
   def show
@@ -24,18 +25,19 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.authenticate(params[:user][:current_password])
+    if @user.authenticate(params[:user][:current_password])
       params[:user].delete :current_password
-      if current_user.update(user_params)
+      if @user.update(user_params)
         flash[:notice] = "User #{current_user.name.capitalize} was successfully updated."
-        redirect_to current_user
+        redirect_to @user
       else
         flash.now[:alert] = "Can\'t update user #{current_user.name.capitalize}!"
         render :edit
+        p @user.errors
       end
     else
       flash[:alert] = "Current password incorrect"
-      redirect_to edit_user_path(current_user)
+      redirect_to edit_user_path(@user)
     end
   end
 
