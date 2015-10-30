@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
 
     def authorization
       unless current_user
-        redirect_to root_path, notice: "Log In first"
+        flash[:notice] = "Log In first"
+        redirect_to root_path
       end
     end
 

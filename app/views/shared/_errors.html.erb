@@ -1,10 +1,8 @@
-<% if @user.errors.any? %>
-  <div class="alert alert-danger">
-    The form contains <%= pluralize(@user.errors.count, "error") %>.
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
+<% unless notice.blank? && alert.blank? %>
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %> text-center fade in" >
+      <%= value %>
+      <%= link_to 'x', '#', {"data-dismiss" => "alert", class: "close"} %>
+    </div>
+  <% end %>
 <% end %>

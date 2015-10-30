@@ -12,8 +12,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to @user, notice: 'User created successfull!'
+      flash[:notice] = 'User created successfully!'
+      redirect_to @user
     else
+      flash.now[:alert] = 'Can\'t create user!'
       render :new
     end
   end
@@ -25,12 +27,15 @@ class UsersController < ApplicationController
     if current_user.authenticate(params[:user][:current_password])
       params[:user].delete :current_password
       if current_user.update(user_params)
-        redirect_to current_user, notice: "User #{current_user.name.capitalize} was successfully updated."
+        flash[:notice] = "User #{current_user.name.capitalize} was successfully updated."
+        redirect_to current_user
       else
+        flash.now[:alert] = "Can\'t update user #{current_user.name.capitalize}!"
         render :edit
       end
     else
-      redirect_to edit_user_path(current_user), notice: 'Current password incorrect'
+      flash[:alert] = "Current password incorrect"
+      redirect_to edit_user_path(current_user)
     end
   end
 
