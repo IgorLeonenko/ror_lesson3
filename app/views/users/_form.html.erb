@@ -29,8 +29,11 @@
           <%= f.password_field :current_password, class: 'form-control' %>
         </div>
       <% end %>
-
-      <%= f.submit params[:action] == 'new' ? "Sign Up" : "Update", class: "btn btn-primary" %>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <%= f.submit "#{params[:action] == 'new' || 'create' ? 'Sign Up' : 'Update'}", class: "btn btn-primary" %>
+      </div>
+      <div class="col-md-4"></div>
     <% end %>
   </div>
 </div>

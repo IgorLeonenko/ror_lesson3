@@ -12,5 +12,5 @@
   <%= @post.tags %>
 </h4>
 
-<%= link_to 'Edit', edit_post_path(@post), class: "btn-sm btn-success" %> |
-<%= link_to 'Back', posts_path, class: "btn-sm btn-info" %>
+<%= link_to 'Edit', edit_user_post_path(current_user.id, @post), class: "btn-sm btn-success" %> |
+<%= link_to 'Back', user_posts_path, class: "btn-sm btn-info" %>

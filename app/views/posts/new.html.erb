@@ -1,8 +1,9 @@
-<h2>New Post</h2>
-
-<div class="col-lg-4">
-  <%= render 'form' %>
+<h1>New Post</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for @post, :url => user_posts_path(current_user.id, @post.id) do |f| %>
+      <%= render partial: "form", locals: { :f => f } %>
+    <% end %>
+  </div>
 </div>
-<div class="col-lg-10" style="margin-top: 10px">
-  <%= link_to 'Back', posts_path, class: "btn-sm btn-info" %>
-</div>
+<%= link_to 'Back', user_posts_path, class: "btn-sm btn-info" %>

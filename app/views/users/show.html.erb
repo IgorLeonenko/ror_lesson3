@@ -1,15 +1,16 @@
 <%= render partial: "shared/notice" %>
+<h1>My profile</h1>
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-        <%= gravatar_for @user %>
-        <h1>Name: <%= @user.name.capitalize %></h1>
-        <h1>Email: <%= @user.email %></h1>
-        <h1>Created_at: <%= @user.created_at.strftime("%d %b. %Y") %></h1>
+        <%= gravatar_for current_user %>
+        <h1>Name: <%= current_user.name.capitalize %></h1>
+        <h1>Email: <%= current_user.email %></h1>
+        <h1>Created_at: <%= current_user.created_at.strftime("%d %b. %Y") %></h1>
       </h1>
     </section>
   </aside>
 </div>
-<%= link_to 'Edit profile', edit_user_path(@user), class: "btn-sm btn-warning" %> |
-<%= link_to 'My posts', '#', class: "btn-sm btn-success" %> |
+<%= link_to 'Edit profile', edit_user_path(current_user), class: "btn-sm btn-warning" %> |
+<%= link_to 'My posts', user_posts_path(current_user), class: "btn-sm btn-success" %> |
 <%= link_to 'Back', root_path, class: "btn-sm btn-info" %>
