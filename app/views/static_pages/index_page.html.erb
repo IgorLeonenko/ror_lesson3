@@ -1,0 +1,43 @@
+<%= render partial: 'shared/notice' %>
+<% unless current_user %>
+  <div class="center jumbotron">
+    <h1>Welcome to the Blog-Leon app</h1>
+
+    <%= link_to "Sign up now!", new_user_path, class: "btn btn-lg btn-primary" %>
+  </div>
+
+  <h1>All posts yesterday</h1>
+
+  <% if @posts.size == 0 %>
+    <h3>No posts found</h3>
+  <% else %>
+    <table class="table table-hover">
+      <thead>
+        <tr class="info">
+          <th>Title</th>
+          <th>Body</th>
+          <th>Tags</th>
+          <th colspan="3">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= post.title %></td>
+            <td><%= post.body.truncate(50) %></td>
+            <td><%= post.tags %></td>
+            <td>
+              <%= link_to 'Show', post, class: "btn-sm btn-info" %>
+              <%= link_to 'Edit', edit_post_path(post), class: "btn-sm btn-warning" %>
+              <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+<% end %>
+
+<%#= link_to 'New Post', new_post_path, class: "btn-sm btn-success" %>
