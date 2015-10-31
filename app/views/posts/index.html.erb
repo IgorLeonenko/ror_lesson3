@@ -25,4 +25,5 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to 'New post', new_user_post_path, class: "btn btn-success" %>
+<%= link_to 'New post', new_user_post_path, class: "btn-sm btn-success" %> |
+<%= link_to 'Back', user_path(current_user.id), class: "btn-sm btn-info" %>
