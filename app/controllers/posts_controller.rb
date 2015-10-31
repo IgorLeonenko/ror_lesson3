@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :user_check, only: [:edit, :update, :destroy]
   skip_before_action :authorization, only: :show
 
   # GET /posts
@@ -64,5 +65,12 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:title, :body, :tags, :user_id)
+    end
+
+    def user_check
+      unless @post.user_id == current_user.id
+        flash[:alert] = 'You are not author!'
+        redirect_to root_path
+      end
     end
 end
