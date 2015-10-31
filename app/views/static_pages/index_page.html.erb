@@ -1,41 +1,18 @@
 <%= render partial: 'shared/errors' %>
 <% if current_user %>
   <h1>Posts</h1>
-  <% @posts.each do |post| %>
-    <%= post.title %>
-  <% end %>
 <% else %>
   <div class="center jumbotron">
     <h1>Welcome to the Blog-Leon app</h1>
-
     <%= link_to "Sign up now!", new_user_path, class: "btn btn-lg btn-primary" %>
   </div>
-
   <h1>10 last posts</h1>
+<% end %>
 
-  <% if @posts.size == 0 %>
-    <h3>No posts found</h3>
-  <% else %>
-    <table class="table table-hover">
-      <thead>
-        <tr class="info">
-          <th>Title</th>
-          <th>Body</th>
-          <th>Tags</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @posts.each do |post| %>
-          <tr>
-            <td><%= post.title %></td>
-            <td><%= post.body.truncate(50) %></td>
-            <td><%= post.tags %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+<% if @posts.size == 0 %>
+  <h3>No posts found</h3>
+<% else %>
+  <% @posts.each do |post| %>
+    <%= render partial: "post", locals: { :post => post } %>
   <% end %>
-
 <% end %>

@@ -1,0 +1,15 @@
+<div class="media">
+  <div class="media-left">
+    <%= gravatar_for post.user %>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <i><%= post.user.name.capitalize %></i> <%= post.title %>
+      <small><%= post.created_at.strftime("%d %b. %Y") %></small>
+      <p class="pull-right text-primary"><i>Tags:</i> <%= post.tags %></p>
+    </h4>
+    <%= post.body.truncate(400) %>
+    <br/>
+    <i><%= link_to 'show more...', user_post_path(post.user.id, post), class: "text-primary" %></i>
+  </div>
+</div>
