@@ -1,5 +1,5 @@
 <%= render partial: 'shared/errors' %>
-<h2>Editing Post</h2>
+<h1>Editing Post</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for @post, :url => user_post_path(current_user.id, @post.id) do |f| %>
