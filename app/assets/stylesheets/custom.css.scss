@@ -155,3 +155,10 @@ aside {
   border-left-color: #1b809e;
   border-radius: 3px;
 }
+
+.media {
+  border-bottom: 1px dashed black;
+  .media-body {
+    height: 105px;
+  }
+}
