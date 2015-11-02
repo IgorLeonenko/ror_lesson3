@@ -9,6 +9,6 @@ class Post < ActiveRecord::Base
   private
 
   def sharp_to_tag
-    self.tags = self.tags.scan(/\w+/).map{|i| '#' + i}.join(" ")
+    self.tags = self.tags.scan(/\w+/).map{|i| '#' + i}.join(" ") if self.tags
   end
 end
