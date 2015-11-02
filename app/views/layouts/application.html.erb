@@ -9,6 +9,7 @@
 <body>
   <%= render 'layouts/header' %>
   <div class="container">
+    <%= render partial: 'shared/errors' %>
     <%= yield %>
     <%= render 'layouts/footer' %>
   </div>

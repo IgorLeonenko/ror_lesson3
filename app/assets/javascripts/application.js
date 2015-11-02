@@ -16,5 +16,5 @@
 //= require turbolinks
 //= require_tree .
 $(document).ready(function(){
-  $('.fade-in').fadeOut(5500);
+  $('.fade-in').fadeOut(3000);
 })
