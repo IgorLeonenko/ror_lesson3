@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       flash[:notice] = 'Post was successfully created!'
       redirect_to user_posts_path
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body, :tags, :user_id)
+      params.require(:post).permit(:title, :body, :tags)
     end
 
     def user_check

@@ -10,8 +10,6 @@
   <%= f.label :tags, class: 'control-label' %><br>
   <%= f.text_field :tags, class: "form-control", :placeholder => 'sign \'#\' will add automatically' %>
 </div>
-<%= f.hidden_field :user_id, :value => params[:user_id] %>
-
 <div class="col-md-4"></div>
   <div class="col-md-4">
     <%= f.submit "#{params[:action] == 'new' || params[:action] == 'create' ? 'Create post' : 'Update post'}", class: "btn btn-success" %>
