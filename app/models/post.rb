@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
 
   before_save :sharp_to_tag
 
+  default_scope  { order(:created_at => :desc) }
+
   private
 
   def sharp_to_tag
