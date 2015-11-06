@@ -8,6 +8,14 @@ class Post < ActiveRecord::Base
 
   default_scope  { order(:created_at => :desc) }
 
+  def self.search(search)
+    if search
+      where('body LIKE :query OR title LIKE :query', query: "%#{search}%")
+    else
+      all
+    end
+  end
+
   private
 
   def sharp_to_tag

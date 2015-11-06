@@ -1,0 +1,7 @@
+<%= form_tag (controller.controller_name == 'posts' ? user_posts_path : root_path), :method => 'get', class: "form-inline" do %>
+  <div class="form-group">
+    <%= text_field_tag :search, params[:search], class: "form-control" %>
+  </div>
+  <%= button_tag "Search", class: "btn btn-info" %>
+  <%= link_to 'Reset', controller.controller_name == 'posts' ? user_posts_path : root_path, class: "btn btn-danger" %>
+<% end %>
