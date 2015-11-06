@@ -29,7 +29,7 @@
       <% end %>
       <div class="col-md-4"></div>
       <div class="col-md-4">
-        <%= f.submit "#{params[:action] == 'new' || params[:action] =='create' ? 'Sign Up' : 'Update'}",
+        <%= f.submit "#{controller.action_name == 'new' || controller.action_name =='create' ? 'Sign Up' : 'Update'}",
             class: "btn btn-primary" %>
       </div>
       <div class="col-md-4"></div>
