@@ -1,0 +1,15 @@
+%h1 Log In
+.row
+  .col-md-6.col-md-offset-3
+    = form_tag sessions_path do
+      .form-group
+        = label_tag :email, 'email', {class: 'control-label'}
+        = text_field_tag :email, params[:email], class: 'form-control'
+      .form-group
+        = label_tag :password, 'password', {class: 'control-label'}
+        = password_field_tag :password, '', class: 'form-control'
+      .col-md-4
+      .col-md-4
+        = submit_tag "Log In", class: "btn btn-primary"
+      .col-md-4
+= link_to 'Back', root_path, class: "btn-sm btn-info"

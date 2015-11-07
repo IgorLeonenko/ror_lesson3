@@ -1,0 +1,18 @@
+%body
+  %header.navbar.navbar-fixed-top.navbar-inverse
+    .container
+      = link_to "Blog-leon #{'| ' + current_user.name if current_user }", root_path, id: "logo"
+      %nav
+        %ul.nav.navbar-nav.navbar-right
+          %li= link_to "Home", root_path
+          - if current_user
+            %li.dropdown{:role => "presentation"}
+              %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                My actions
+                %span.caret
+              %ul.dropdown-menu
+                %li= link_to 'My account', user_path(current_user.id)
+                %li= link_to 'My posts', user_posts_path(current_user.id)
+            %li= link_to 'Logout', session_path(current_user.id), method: :delete
+          - else
+            %li= link_to 'Login', new_session_path

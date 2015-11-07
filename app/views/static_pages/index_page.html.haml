@@ -1,0 +1,14 @@
+- if current_user
+  %h1 All posts
+  = render 'shared/search_form'
+- else
+  .center.jumbotron
+    %h1 Welcome to the Blog-Leon app
+    = link_to "Sign up now!", new_user_path, class: "btn btn-lg btn-primary"
+  %h1 10 last posts
+- if @posts.size == 0
+  %h3 No posts found
+- else
+  - @posts.each do |post|
+    = render partial: "post", locals: { :post => post }
+  = paginate @posts, :theme => 'twitter-bootstrap-3', :pagination_class => 'pagination-sm' if current_user
