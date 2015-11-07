@@ -6,8 +6,8 @@
       <br/>
       <%= post.title %>
       <br/>
-      Author: <i><%= post.user.name.capitalize %></i>
-      <p class="pull-right text-primary"><i>Tags:</i> <%= post.tags %></p>
+      <p><span style="font-size: 1.8em">Author: <i><%= post.user.name.capitalize %></i></span>
+      <span class="pull-right text-primary"><i>Tags:</i> <%= post.tags.truncate(100) %></span></p>
     </h4>
   </div>
   <div class="media-body">

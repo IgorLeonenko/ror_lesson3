@@ -18,7 +18,7 @@
       <tr>
         <td><%= post.title %></td>
         <td><%= post.body.truncate(50) %></td>
-        <td><%= post.tags %></td>
+        <td><%= post.tags.truncate(30) %></td>
         <td>
           <%= link_to 'Show', user_post_path(current_user.id, post), class: "btn-sm btn-info" %>
           <%= link_to 'Edit', edit_user_post_path(current_user.id, post), class: "btn-sm btn-warning" %>
