@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  include JsonFormat
+
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:edit, :update, :destroy]
   skip_before_action :authorization, only: :show
@@ -7,11 +9,19 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.where(:user_id => current_user.id).search(params[:search]).page(params[:page]).per(10)
+    respond_to do |format|
+      format.html { @posts }
+      format.json { render json: json_format(@posts) }
+    end
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    respond_to do |format|
+      format.html { @post }
+      format.json { render json: json_format(@post) }
+    end
   end
 
   # GET /posts/new
