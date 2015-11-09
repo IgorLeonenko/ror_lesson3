@@ -18,11 +18,11 @@ class Post < ActiveRecord::Base
   end
 
   def like_count
-    Like.where('like = ? AND post_id = ?', true, self.id).size
+    Like.where(like: true, post_id: self.id).size
   end
 
   def dislike_count
-    Like.where('dislike = ? AND post_id = ?', true, self.id).size
+    Like.where(dislike: true, post_id: self.id).size
   end
 
   private
