@@ -1,0 +1,21 @@
+#changes.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header{:style => "border:none"}
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        %h1.text-center
+          Now You can set likes and dislikes!
+        %h2.text-center
+          Remember! You can do it only one time for one post
+        %h2.text-center
+          Only for registered or logged users!
+        %h2.text-center
+          = link_to 'Sign In', new_user_path, class: "text-primary"
+          |
+          = link_to 'Log In', new_session_path, class: "text-primary"
+
+
+:javascript
+  $('#changes').modal('toggle');

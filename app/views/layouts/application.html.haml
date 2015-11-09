@@ -9,8 +9,10 @@
   %body
     = render 'layouts/header'
     .container
+      - if session[:modal] == 1
+        = render 'shared/changes_modal'
       - if session[:count] == 10
         = render 'shared/modal_geek_hub'
-      = render partial: 'shared/errors'
+      = render 'shared/errors'
       = yield
       = render 'layouts/footer'

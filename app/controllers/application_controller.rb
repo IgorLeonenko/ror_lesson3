@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authorization, :counter
+  before_action :first_time_visit?
   helper_method :current_user
 
   protected
@@ -25,6 +26,14 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
+  def first_time_visit?
+    if session[:modal].nil?
+      session[:modal] = 1
+    else
+      session[:modal] = 0
+    end
   end
 
 end
