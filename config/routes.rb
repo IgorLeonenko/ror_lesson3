@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post 'likes/:id/:user_id' => 'likes#like_post', as: 'like'
+  post 'dislikes/:id/:user_id' => 'likes#dislike_post', as: 'dislike'
+
   resources :users do
     resources :posts
   end
@@ -6,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'about' => 'static_pages#about'
   get 'contact' => 'static_pages#contact'
+  # put 'like/:id' => 'static_pages#like_post', as: 'like'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

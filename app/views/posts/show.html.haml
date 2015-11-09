@@ -14,6 +14,19 @@
 %h5.text-primary
   %strong Tags:
   %i= @post.tags
+%span.fa.fa-thumbs-up.text-primary
+  %span{id: "like-#{@post.id}"}
+    - if @post.like_count != 0
+      = @post.like_count
+    - else
+      0
+|
+%span.fa.fa-thumbs-down.text-danger
+  %span{id: "dislike-#{@post.id}"}
+    - if @post.dislike_count != 0
+      = @post.dislike_count
+    - else
+      0
 .bs-callout
   %h4= @post.body
 - if current_user && @post.user_id == current_user.id

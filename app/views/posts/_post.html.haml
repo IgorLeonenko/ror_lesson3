@@ -1,0 +1,59 @@
+.media
+  .media-left
+    = gravatar_for post.user
+    %h4.media-heading
+      %small= post.created_at.strftime("%d %b. %Y")
+      %span.text-warning= post.title
+    %p
+      %span{:style => "font-size: 1.6em"}
+        Author:
+        %i= post.user.name.capitalize
+      %span.pull-right.text-primary
+        %i Tags:
+        = post.tags.truncate(100)
+  .media-body
+    = post.body.truncate(400)
+    %p
+      %i= link_to 'show more...', user_post_path(post.user.id, post), class: "text-primary"
+      %span.pull-right
+        - if current_user
+          - if current_user.like?(post)
+            %a{class: "likes like-#{post.id}", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Only one time!"}
+              %span.fa.fa-thumbs-up.text-primary
+          - else
+            = link_to '<span class="fa fa-thumbs-up text-primary"></span>'.html_safe, like_path(post.id, current_user.id), class: "likes like-#{post.id}", method: :post, remote: true
+          %span.text-primary{id: "like-#{post.id}"}
+            - if post.like_count != 0
+              = post.like_count
+            - else
+              0
+          |
+          - if current_user.dislike?(post)
+            %a{class: "dislikes dislike-#{post.id}", "data-placement" => "bottom", "data-toggle" => "tooltip", title: "Only one time!"}
+              %span.fa.fa-thumbs-down.text-danger
+          - else
+            = link_to '<span class="fa fa-thumbs-down text-danger"></span>'.html_safe, dislike_path(post.id, current_user.id), class: "dislikes dislike-#{post.id}", method: :post, remote: true
+          %span.text-danger{id: "dislike-#{post.id}"}
+            - if post.dislike_count != 0
+              = post.dislike_count
+            - else
+              0
+        - else
+          %span.fa.fa-thumbs-up.text-primary
+            %span{id: "like-#{post.id}"}
+              - if post.like_count != 0
+                = post.like_count
+              - else
+                0
+          |
+          %span.fa.fa-thumbs-down.text-danger
+            %span{id: "dislike-#{post.id}"}
+              - if post.dislike_count != 0
+                = post.dislike_count
+              - else
+                0
+
+:javascript
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })

@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :user
+  has_many :likes, dependent: :destroy
 
   validates_presence_of :title, :body
   validates :title, uniqueness: true, length: { in: 5..100 }
@@ -14,6 +15,14 @@ class Post < ActiveRecord::Base
     else
       all
     end
+  end
+
+  def like_count
+    Like.where('like = ? AND post_id = ?', true, self.id).size
+  end
+
+  def dislike_count
+    Like.where('dislike = ? AND post_id = ?', true, self.id).size
   end
 
   private

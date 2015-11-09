@@ -1,0 +1,13 @@
+$("#like-<%= @post.id %>").html("<%= @post.like_count %>");
+$("#dislike-<%= @post.id %>").html("<%= @post.dislike_count %>");
+
+<% if current_user.dislike?(@post) %>
+  $("a.dislike-<%= @post.id %>").removeAttr('href data-method data-remote').attr({"data-placement":"bottom", "data-toggle":"tooltip", "data-original-title":"Only one time!", "title":"" });
+  $("a.like-<%= @post.id %>").removeAttr("data-placement data-toggle data-original-title title").attr({"data-method":"post", "data-remote":"true", "href":"/likes/<%=@post.id%>/<%=current_user.id%>" });
+
+  
+  
+<% end %>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
