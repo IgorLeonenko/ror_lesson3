@@ -17,41 +17,17 @@
       %i= link_to 'show more...', user_post_path(post.user.id, post), class: "text-primary"
       %span.pull-right
         - if current_user
-          - if current_user.like?(post)
-            %a{class: "likes like-#{post.id}", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Only one time!"}
-              %span.fa.fa-thumbs-up.text-primary
-          - else
-            = link_to '<span class="fa fa-thumbs-up text-primary"></span>'.html_safe, like_path(post.id, current_user.id), class: "likes like-#{post.id}", method: :post, remote: true
-          %span.text-primary{id: "like-#{post.id}"}
-            - if post.like_count != 0
-              = post.like_count
-            - else
-              0
+          = like_thumb(current_user, post)
+          = like_dislike(like=true, post)
           |
-          - if current_user.dislike?(post)
-            %a{class: "dislikes dislike-#{post.id}", "data-placement" => "bottom", "data-toggle" => "tooltip", title: "Only one time!"}
-              %span.fa.fa-thumbs-down.text-danger
-          - else
-            = link_to '<span class="fa fa-thumbs-down text-danger"></span>'.html_safe, dislike_path(post.id, current_user.id), class: "dislikes dislike-#{post.id}", method: :post, remote: true
-          %span.text-danger{id: "dislike-#{post.id}"}
-            - if post.dislike_count != 0
-              = post.dislike_count
-            - else
-              0
+          = dislike_thumb(current_user, post)
+          = like_dislike(like=false, post)
         - else
           %span.fa.fa-thumbs-up.text-primary
-            %span{id: "like-#{post.id}"}
-              - if post.like_count != 0
-                = post.like_count
-              - else
-                0
+            = like_dislike(like=true, post)
           |
           %span.fa.fa-thumbs-down.text-danger
-            %span{id: "dislike-#{post.id}"}
-              - if post.dislike_count != 0
-                = post.dislike_count
-              - else
-                0
+            = like_dislike(like=false, post)
 
 :javascript
   $(function () {
