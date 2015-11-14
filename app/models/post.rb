@@ -2,8 +2,9 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :likes, dependent: :destroy
 
-  validates_presence_of :title, :body
-  validates :title, uniqueness: true, length: { in: 5..100 }
+  validates_presence_of :title, :body, :user_id
+  validates :title, uniqueness: true, length: { in: 5..140 }
+  validates :body, length: { minimum: 140 }
 
   before_save :sharp_to_tag
 
