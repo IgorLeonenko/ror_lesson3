@@ -17,7 +17,7 @@ class StaticPagesController < ApplicationController
   def set_posts
     @posts =
     if current_user && params[:popular].present?
-      Post.popular.limit(30).page(params[:page]).per(10)
+      Post.all.popular.limit(30).page(params[:page]).per(10)
     elsif current_user
       Post.search(params[:search]).page(params[:page]).per(10)
     else
