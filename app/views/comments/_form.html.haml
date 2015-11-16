@@ -1,5 +1,5 @@
 .form-group
-  = f.text_area :body, rows: 5, placeholder: 'add comment here. maximum 100 chars', class: "form-control"
+  = f.text_area :body, rows: 5, placeholder: 'add comment here. minimum 100 chars', class: "form-control"
 .col-md-3{ style: "padding-left: 0;" }
   = f.submit "#{ c.persisted? ? 'Update' : 'Comment'}", class: "btn btn-success"
 .col-md-3{ style: "padding-left: 0;" }
