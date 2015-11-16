@@ -18,6 +18,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @comment = Comment.new
     respond_to do |format|
       format.html { @post }
       format.json { render json: json_format(@post) }

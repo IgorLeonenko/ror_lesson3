@@ -1,4 +1,4 @@
-.comment
+.comment{id: "close-comment-#{comment.id}"}
   .media
     .media-left
       = gravatar_for comment.user
@@ -14,7 +14,7 @@
       = comment.body
       - if current_user && current_user.id == comment.user.id
         %p
-          = link_to 'Update', "#update-comment-#{comment.id}", onclick: "$('#update-comment-#{comment.id}').show();"
+          = link_to 'Update', "#update-comment-#{comment.id}", onclick: "$('#update-comment-#{comment.id}').show();", class: 'scroll', 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
     .col-md-1
     .col-md-8{ style: "margin-bottom: 10px", id: "update-comment-#{comment.id}",class: "comment-form" }
       - if current_user

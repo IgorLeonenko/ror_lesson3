@@ -4,6 +4,6 @@
   = f.submit "#{ c.persisted? ? 'Update' : 'Comment'}", class: "btn btn-success"
 .col-md-3{ style: "padding-left: 0;" }
   - if c.persisted?
-    = link_to 'Cancel', "#update-comment-#{c.id}", class: "btn btn-danger", onclick:"$('#update-comment-#{c.id}').hide();"
+    = link_to 'Cancel', "#close-comment-#{c.id}", class: " scroll btn btn-danger", onclick:"$('#update-comment-#{c.id}').hide();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
   - else
-    = link_to 'Cancel',  "#new-comment-#{post.id}", class: "btn btn-danger", onclick:"$('#new-comment-#{post.id}').hide(); $('.comment-#{post.id}').show();"
+    = link_to 'Cancel',  "#close-comment-#{post.id}", class: " scroll btn btn-danger", onclick:"$('#new-comment-#{post.id}').hide(); $('.comment-#{post.id}').show();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
