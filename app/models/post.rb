@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   before_save :sharp_to_tag
 
   default_scope  { order(:created_at => :desc) }
-  scope :popular, -> { joins(:likes).group(:post_id).having("count(post_id) > 9") }
+  scope :popular, -> { unscoped.joins(:likes).group(:post_id).having("count(post_id) > 9") }
 
   def self.search(search)
     if search
