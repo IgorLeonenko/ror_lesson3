@@ -43,7 +43,7 @@ class CommentsController < ApplicationController
     end
 
     def check_path
-      redirect_to URI(request.referer).path == user_post_path(current_user, @post) ? :back : root_path
+      redirect_to URI(request.referer).path == "/users/#{current_user.id}/posts/#{@post.id}" ? :back : root_path
     end
 
     def comment_params
