@@ -1,0 +1,9 @@
+.form-group
+  = f.text_area :body, rows: 5, placeholder: 'add comment here. maximum 100 chars', class: "form-control"
+.col-md-3{ style: "padding-left: 0;" }
+  = f.submit "#{ c.persisted? ? 'Update' : 'Comment'}", class: "btn btn-success"
+.col-md-3{ style: "padding-left: 0;" }
+  - if c.persisted?
+    = link_to 'Cancel', "#update-comment-#{c.id}", class: "btn btn-danger", onclick:"$('#update-comment-#{c.id}').hide();"
+  - else
+    = link_to 'Cancel',  "#new-comment-#{post.id}", class: "btn btn-danger", onclick:"$('#new-comment-#{post.id}').hide(); $('.comment-#{post.id}').show();"

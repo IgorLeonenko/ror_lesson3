@@ -159,7 +159,7 @@ aside {
 .media {
   border-bottom: 1px dashed black;
   .media-body {
-    height: 85px;
+    /*height: 55px;*/
   }
 }
 
@@ -168,6 +168,27 @@ aside {
     background-color: transparent;
   }
 }
+
 a.likes, a.dislikes{
   background-color: transparent !important;
+}
+
+.comment-form {
+  display:none;
+}
+
+.comment {
+  margin-bottom: 10px;
+  .media{
+    padding-bottom: 10px;
+  }
+  img {
+    width: 50px;
+    height: 50px;
+  }
+}
+.comment:last-child {
+  .media {
+    border: none;
+  }
 }

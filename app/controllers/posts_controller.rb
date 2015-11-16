@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       flash[:notice] = 'Post was successfully updated!'
-      redirect_to user_posts_path, notice: 'Post was successfully updated.'
+      redirect_to user_posts_path
     else
       flash.now[:alert] = 'Can\'t update post!'
       render :edit

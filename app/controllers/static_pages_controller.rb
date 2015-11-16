@@ -5,6 +5,7 @@ class StaticPagesController < ApplicationController
   before_action :set_posts
 
   def index_page
+    @comment = Comment.new
   end
 
   def json_page

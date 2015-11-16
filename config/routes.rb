@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   post 'dislikes/:id/:user_id' => 'likes#dislike_post', as: 'dislike'
 
   resources :users do
-    resources :posts
+    resources :posts do
+      resources :comments, only: [ :create, :update, :destroy ]
+    end
   end
   resources :sessions
 

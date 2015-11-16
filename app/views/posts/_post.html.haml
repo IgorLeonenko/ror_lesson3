@@ -11,10 +11,10 @@
       %span.pull-right.text-primary
         %i Tags:
         = post.tags.truncate(100)
-  .media-body
+  .media-body{ style: "#{!current_user ? 'margin-bottom: 15px;' : ''}"}
     = post.body.truncate(400)
-    %p
-      %i= link_to 'show more...', user_post_path(post.user.id, post), class: "text-primary"
+    %i
+      = link_to 'show more', user_post_path(post.user.id, post), class: "text-primary"
       %span.pull-right
         - if current_user
           = like_thumb(current_user, post)
@@ -28,8 +28,54 @@
           |
           %span.fa.fa-thumbs-down.text-danger
             = like_dislike(like=false, post)
+    - if current_user
+      %p
+        = link_to 'add comment', "#new-comment-#{post.id}", class: "btn btn-sm btn-success comment-#{post.id}", onclick: "$('#new-comment-#{post.id}').show(); $(this).hide()"
+  - if post.comments.size !=0
+    .row{ class: "comments-#{post.id}" }
+      .col-md-1
+      .col-md-8
+        %h4
+          Comments:
+        - post.comments.each do |comment|
+          = render partial: 'comments/comment', locals: { comment: comment, post: post }
+  - if current_user
+    .col-md-2
+    .col-md-6{ style: "margin-bottom: 10px", id: "new-comment-#{post.id}",class: "comment-form" }
+      = form_for [current_user, post, @comment] do |f|
+        = render partial: "comments/form", locals: { :f => f, post: post, c: @comment }
 
 :javascript
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
-  })
+  });
+  $(document).ready(function(){
+    $('a[href^="#new-comment-#{post.id}"]').on('click',function (e) {
+        e.preventDefault();
+
+        var target = this.hash;
+        var $target = $(target);
+        var comments = $(".comments-#{post.id}").height();
+
+        $('html, body').stop().animate({
+            'scrollTop': $target.offset().top - 70
+        }, 700, 'swing', function () {
+            window.location.hash = target;
+        });
+    });
+  });
+  $(document).ready(function(){
+    $('a[href^="#update-comment-#{post.id}"]').on('click',function (e) {
+        e.preventDefault();
+
+        var target = this.hash;
+        var $target = $(target);
+        var comments = $(".comments-#{post.id}").height();
+
+        $('html, body').stop().animate({
+            'scrollTop': $target.offset().top - 70
+        }, 700, 'swing', function () {
+            window.location.hash = target;
+        });
+    });
+  });
