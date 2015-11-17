@@ -18,6 +18,8 @@ class StaticPagesController < ApplicationController
     @posts =
     if current_user && params[:popular].present?
       Post.all.popular.limit(30).page(params[:page]).per(10)
+    elsif current_user && params[:active].present?
+      Post.all.unscoped.order(updated_at: :desc).page(params[:page]).per(10)
     elsif current_user
       Post.all.search(params[:search]).page(params[:page]).per(10)
     else

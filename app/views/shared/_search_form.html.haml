@@ -4,7 +4,12 @@
   = button_tag "Search", class: "btn btn-info"
   = link_to 'Reset', controller.controller_name == 'posts' ? user_posts_path : root_path, class: "btn btn-danger"
   - unless controller.controller_name == 'posts'
-    - if params[:popular].present?
-      = link_to 'All posts', root_path, class: "btn btn-success pull-right"
-    - else
-      = link_to 'Popular posts', root_path(popular: true), class: "btn btn-success pull-right"
+    .pull-right
+      - if params[:popular].present?
+        = link_to 'All posts', root_path, class: "btn btn-success"
+      - else
+        = link_to 'Popular posts', root_path(popular: true), class: "btn btn-success"
+      - if params[:active].present?
+        = link_to 'All posts', root_path, class: "btn btn-success"
+      - else
+        = link_to 'Active posts', root_path(active: true), class: "btn btn-success"
