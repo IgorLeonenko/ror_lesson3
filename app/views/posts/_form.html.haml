@@ -6,10 +6,13 @@
   = f.label :body, class: 'control-label'
   %br/
   = f.text_area :body, class: "form-control", rows: 10
-.form-group
-  = f.fields_for :tags do |tag|
-    = tag.label :tags, class: 'control-label'
-    = tag.text_field :name, class: "form-control"
+.form-group{ class: "#{@post.errors.get(:tags).present? ? 'has-error' : ''}"}
+  = f.label :tag_list, "Tags", class: 'control-label'
+  %br/
+  = f.text_field :tag_list, class: "form-control", placeholder: "Separated by commas. No more than 5"
+  - if @post.errors.get(:tags).present?
+    %span.help-inline
+      = @post.errors.get(:tags).join('')
 .col-md-4
 .col-md-4
   = f.submit "#{controller.action_name == 'new' || controller.action_name == 'create' ? 'Create post' : 'Update post'}", class: "btn btn-success"
