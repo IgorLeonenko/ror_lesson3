@@ -16,7 +16,7 @@
       %tr
         %td= post.title
         %td= post.body.truncate(50)
-        %td= post.tags.truncate(30)
+        %td= post.tags.map(&:name).join(',')
         %td= post.like_count
         %td= post.dislike_count
         %td

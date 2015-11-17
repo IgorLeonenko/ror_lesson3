@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  has_many :posts, dependent: :destroy
+  has_many :posts, through: :tags, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :tags
 
   validates_presence_of :email, :name
   validates :name, length: {maximum: 51}

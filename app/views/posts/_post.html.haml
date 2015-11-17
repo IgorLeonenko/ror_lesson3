@@ -10,7 +10,6 @@
         %i= post.user.name.capitalize
       %span.pull-right.text-primary
         %i Tags:
-        = post.tags.truncate(100)
   .media-body{ style: "#{!current_user ? 'margin-bottom: 15px;' : ''}"}
     = post.body.truncate(400)
     %i

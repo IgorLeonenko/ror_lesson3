@@ -7,9 +7,9 @@
   %br/
   = f.text_area :body, class: "form-control", rows: 10
 .form-group
-  = f.label :tags, class: 'control-label'
-  %br/
-  = f.text_field :tags, class: "form-control", :placeholder => 'sign \'#\' will add automatically'
+  = f.fields_for :tags do |tag|
+    = tag.label :tags, class: 'control-label'
+    = tag.text_field :name, class: "form-control"
 .col-md-4
 .col-md-4
   = f.submit "#{controller.action_name == 'new' || controller.action_name == 'create' ? 'Create post' : 'Update post'}", class: "btn btn-success"

@@ -14,7 +14,6 @@
       Author: #{@post.user.name.capitalize}
 %h5.text-primary
   %strong Tags:
-  %i= @post.tags
 %span.fa.fa-thumbs-up.text-primary
   %span{id: "like-#{@post.id}"}
     - if @post.like_count != 0
