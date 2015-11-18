@@ -14,11 +14,7 @@ class Post < ActiveRecord::Base
   scope :popular, -> { unscoped.select('posts.*').joins(:likes).group('posts.id').having('count(posts.id) > 9') }
 
   def self.search(search)
-    if search
-      where('body LIKE :query OR title LIKE :query', query: "%#{search}%")
-    else
-      all
-    end
+    where('body LIKE :query OR title LIKE :query', query: "%#{search}%")
   end
 
   def like_count
@@ -30,7 +26,7 @@ class Post < ActiveRecord::Base
   end
 
   def tag_list
-    tags.map(&:name).join(", ")
+    tags.map(&:name)
   end
 
   def tag_list=(names)
@@ -39,4 +35,13 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def self.find_by_params(params, current_user)
+    posts = Post.all
+    posts = posts.popular.limit(30) if current_user && params[:popular].present?
+    posts = posts.unscoped.order(updated_at: :desc) if current_user && params[:active].present?
+    posts = posts.joins(:tags).where(tags: {name: params[:tag]}) if current_user && params[:tag].present?
+    posts = posts.search(params[:search]) if current_user && params[:search].present?
+    posts = posts.page(params[:page]).per(10)
+    posts
+  end
 end

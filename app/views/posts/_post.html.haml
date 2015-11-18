@@ -10,7 +10,8 @@
         %i= post.user.name.capitalize
       %span.pull-right.text-primary
         %i Tags:
-        = post.tag_list
+        - post.tag_list.each do |tag|
+          = link_to "#{tag}", root_path(tag: "#{tag}"), class: "btn btn-xs btn-default"
   .media-body{ style: "#{!current_user ? 'margin-bottom: 15px;' : ''}"}
     = post.body.truncate(400)
     %i

@@ -15,15 +15,10 @@ class StaticPagesController < ApplicationController
   private
 
   def set_posts
-    @posts =
-    if current_user && params[:popular].present?
-      Post.all.popular.limit(30).page(params[:page]).per(10)
-    elsif current_user && params[:active].present?
-      Post.all.unscoped.order(updated_at: :desc).page(params[:page]).per(10)
-    elsif current_user
-      Post.all.search(params[:search]).page(params[:page]).per(10)
+    if current_user
+      @posts = Post.find_by_params(params, current_user)
     else
-      Post.all.limit(10)
+      @posts = Post.all.limit(10)
     end
   end
 end
