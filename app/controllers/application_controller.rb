@@ -19,13 +19,13 @@ class ApplicationController < ActionController::Base
   private
 
   def counter
-    if session[:user_id].present?
+    if cookies[:user_id].present?
       session[:count].nil? ? session[:count] = 0 : session[:count] += 1
     end
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.find(cookies[:user_id]) if cookies[:user_id]
   end
 
   def first_time_visit?
