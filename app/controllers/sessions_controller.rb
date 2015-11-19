@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
 
   def destroy
     cookies.delete(:user_id)
-    session.delete(:count)
+    reset_session
     redirect_to root_path, notice: 'You are log out!'
   end
 
