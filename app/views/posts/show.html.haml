@@ -29,6 +29,8 @@
     - else
       0
 .bs-callout
+  - if !@post.image_url.blank?
+    = image_tag "#{@post.image_url}", width: "100%"
   %h4= @post.body
 .row
   .col-md-12

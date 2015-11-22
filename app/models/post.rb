@@ -9,6 +9,8 @@ class Post < ActiveRecord::Base
   validates :title, uniqueness: true, length: { in: 5..140 }
   validates :body, length: { minimum: 140 }
   validates_length_of :tags, maximum: 5
+  validates_format_of :image_url, with: /\.(png|jpg|gif)$/i, multiline: true, message: "must have an image extension",
+                      allow_blank: true
 
   default_scope  { order(created_at: :desc) }
   scope :popular, -> { unscoped.select('posts.*').joins(:likes).group('posts.id').having('count(posts.id) > 9') }

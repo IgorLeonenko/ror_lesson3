@@ -13,6 +13,10 @@
   - if @post.errors.get(:tags).present?
     %span.help-inline
       = @post.errors.get(:tags).join('')
+.form-group
+  = f.label :image_url, class: 'control-label'
+  %br/
+  = f.text_field :image_url, class: "form-control"
 .col-md-4
 .col-md-4
   = f.submit "#{controller.action_name == 'new' || controller.action_name == 'create' ? 'Create post' : 'Update post'}", class: "btn btn-success"

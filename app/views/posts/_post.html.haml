@@ -1,39 +1,41 @@
 .media{id:"close-comment-#{post.id}"}
   .media-left
-    = gravatar_for post.user
     %h4.media-heading
-      %small= post.created_at.strftime("%d %b. %Y")
-      %span.text-warning= post.title
-    %p
-      %span{:style => "font-size: 1.6em"}
-        Author:
-        %i= post.user.name.capitalize
-      %span.pull-right.text-primary
-        %i Tags:
-        - post.tag_list.each do |tag|
-          = link_to "#{tag}", root_path(tag: "#{tag if current_user}"), class: "btn btn-xs btn-default"
-  .media-body{ style: "#{!current_user ? 'margin-bottom: 15px;' : ''}"}
-    = post.body.truncate(400)
-    %i
-      = link_to 'show more', user_post_path(post.user.id, post), class: "text-primary"
-      %span.pull-right
-        - if current_user
-          = like_thumb(current_user, post)
-          = like_dislike(like=true, post)
-          |
-          = dislike_thumb(current_user, post)
-          = like_dislike(like=false, post)
-        - else
-          %span.fa.fa-thumbs-up.text-primary
-            = like_dislike(like=true, post)
-          |
-          %span.fa.fa-thumbs-down.text-danger
-            = like_dislike(like=false, post)
-    - if current_user
+      %span= post.title
       %p
-        = link_to 'add comment', "#new-comment-#{post.id}", class: "scroll btn btn-sm btn-success comment-#{post.id}", onclick: "$('#new-comment-#{post.id}').show(); $(this).hide()", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+        %small
+          Author:
+          %i= post.user.name.capitalize
+        %br/
+        %small
+          Created:
+          = post.created_at.strftime("%d %b. %Y")
+        %span.pull-right.text-primary
+          %i Tags:
+          - post.tag_list.each do |tag|
+            = link_to "#{tag}", root_path(tag: "#{tag if current_user}"), class: "btn btn-xs btn-default"
+  .media-body{ style: "#{!current_user ? 'margin-bottom: 15px;' : ''}"}
+    - if !post.image_url.blank?
+      = image_tag "#{post.image_url}", width: "100%", style: "float:left; width: 40%; padding: 0 20px 10px 0"
+    = post.body.truncate(1000)
+  %ul.list-inline.pull-left
+    %li
+      - if current_user
+        = link_to ' comment', "#new-comment-#{post.id}", class: "scroll comment-#{post.id} fa fa-pencil-square-o btn btn-info", onclick: "$('#new-comment-#{post.id}').show();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+    %li
+      = link_to ' read more', user_post_path(post.user.id, post), class: 'fa fa-eye btn btn-info'
+  %span.pull-right
+    - if current_user
+      = like_thumb(current_user, post)
+      = dislike_thumb(current_user, post)
+    - else
+      %span.fa.fa-thumbs-up.text-primary
+        = like_dislike(like=true, post)
+      %span.fa.fa-thumbs-down.text-danger
+        = like_dislike(like=false, post)
+
   - if post.comments.size !=0
-    .row{ class: "comments-#{post.id}" }
+    .row{ class: "comments-#{post.id}", style: "margin-top: 40px;" }
       .col-md-1
       .col-md-8
         %h4
