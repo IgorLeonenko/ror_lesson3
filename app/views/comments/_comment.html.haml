@@ -16,7 +16,7 @@
         %p
           = link_to 'Update', "#update-comment-#{comment.id}", onclick: "$('#update-comment-#{comment.id}').show();", class: 'scroll', 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
     .col-md-1
-    .col-md-8{ style: "margin-bottom: 10px", id: "update-comment-#{comment.id}",class: "comment-form" }
+    .col-md-8{ id: "update-comment-#{comment.id}", class: "comment-form" }
       - if current_user
         = form_for [current_user, post, comment], method: :patch do |f|
           = render partial: "comments/form", locals: { f: f, post: post, c: comment }

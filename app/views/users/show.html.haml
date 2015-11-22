@@ -1,16 +1,15 @@
-%h1 My profile
-.row
-  %aside.col-md-4
-    %section.user_info
-      = gravatar_for current_user
-      %h1
-        Name: #{current_user.name.capitalize}
-      %h1
-        Email: #{current_user.email}
-      %h1
-        Created_at: #{current_user.created_at.strftime("%d %b. %Y")}
-= link_to 'Edit profile', edit_user_path(current_user), class: "btn-sm btn-warning"
-|
-= link_to 'My posts', user_posts_path(current_user), class: "btn-sm btn-success"
-|
-= link_to 'Back', root_path, class: "btn-sm btn-info"
+.bs-callout
+  %h1 My profile
+  .row
+    %aside.col-md-4
+      %section.user_info
+        = gravatar_for current_user
+        %h1
+          Name: #{current_user.name.capitalize}
+        %h1
+          Email: #{current_user.email}
+        %h1
+          Created_at: #{current_user.created_at.strftime("%d %b. %Y")}
+  = link_to ' edit profile', edit_user_path(current_user), class: "btn btn-info fa fa-file-text"
+  = link_to ' my posts', user_posts_path(current_user), class: "btn btn-info fa fa-bars"
+  = link_to ' back', root_path, class: "btn btn-info fa fa-circle-o-notch"

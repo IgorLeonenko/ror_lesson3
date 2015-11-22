@@ -4,7 +4,6 @@
   .center.jumbotron
     %h1 Welcome to the Blog-Leon app
     = link_to "Sign up now!", new_user_path, class: "btn btn-lg btn-primary"
-  %h1 10 last posts
 - if @posts.length == 0
   %h3 No posts found
 - else

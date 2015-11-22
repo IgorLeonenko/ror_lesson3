@@ -8,7 +8,7 @@
     = csrf_meta_tags
   %body
     = render 'layouts/header'
-    .container
+    .container{style:"min-height: 560px;"}
       - if session[:modal] == 1
         = render 'shared/changes_modal'
       - if session[:count] == 10

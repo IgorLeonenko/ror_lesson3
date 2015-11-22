@@ -2,7 +2,7 @@ $("#like-<%= @post.id %>").html("<%= @post.like_count %>");
 $("#dislike-<%= @post.id %>").html("<%= @post.dislike_count %>");
 
 <% if current_user.like?(@post) %>
-  $("a.like-<%= @post.id %>").removeAttr('href data-method data-remote').attr({"data-placement":"bottom", "data-toggle":"tooltip", "data-original-title":"Only one time!", "title":"" });
+  $("a.like-<%= @post.id %>").removeAttr('href data-method data-remote').attr({"data-placement":"top", "data-toggle":"tooltip", "data-original-title":"Only one time!", "title":"" });
   $("a.dislike-<%= @post.id %>").removeAttr("data-placement data-toggle data-original-title title").attr({"data-method":"post", "data-remote":"true", "href":"/dislikes/<%=@post.id%>/<%=current_user.id%>" });
 <% end %>
 $(function () {

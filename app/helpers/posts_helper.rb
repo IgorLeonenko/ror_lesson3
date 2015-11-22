@@ -21,23 +21,25 @@ module PostsHelper
 
   def like_thumb(current_user, post)
     if current_user.id == post.user_id || current_user.like?(post)
-      "<a class='likes like-#{post.id}' data-placement='bottom' data-toggle='tooltip' title='#{current_user.like?(post) ? 'Only one time!' : 'You cant like own post'}'>
+      "<a class='likes like-#{post.id} btn btn-info' data-placement='top' data-toggle='tooltip' title='#{current_user.like?(post) ? 'Only one time!' : 'You cant like own post'}'>
         <span class='fa fa-thumbs-up text-primary'></span>
+        #{like_dislike(like=true, post)}
       </a>".html_safe
     else
-      link_to '<span class="fa fa-thumbs-up text-primary"></span>'.html_safe, like_path(post.id, current_user.id),
-              class: "likes like-#{post.id}", method: :post, remote: true
+      link_to "<span class='fa fa-thumbs-up text-primary'></span> #{like_dislike(like=true, post)}".html_safe, like_path(post.id, current_user.id),
+              class: "likes like-#{post.id} btn btn-info", method: :post, remote: true
     end
   end
 
   def dislike_thumb(current_user, post)
     if current_user.id == post.user_id || current_user.dislike?(post)
-      "<span class='dislikes dislike-#{post.id}' data-placement='bottom' data-toggle='tooltip' title='#{ current_user.dislike?(post) ? 'Only one time!' : 'You cant dislike own post'}'>
+      "<a class='dislikes dislike-#{post.id} btn btn-danger' data-placement='top' data-toggle='tooltip' title='#{ current_user.dislike?(post) ? 'Only one time!' : 'You cant dislike own post'}'>
         <span class='fa fa-thumbs-down text-danger'></span>
+        #{like_dislike(like=false, post)}
       </a>".html_safe
     else
-      link_to '<span class="fa fa-thumbs-down text-danger"></span>'.html_safe, dislike_path(post.id, current_user.id),
-              class: "dislikes dislike-#{post.id}", method: :post, remote: true
+      link_to "<span class='fa fa-thumbs-down text-danger'></span> #{like_dislike(like=false, post)}".html_safe, dislike_path(post.id, current_user.id),
+              class: "dislikes dislike-#{post.id} btn btn-danger", method: :post, remote: true
     end
   end
 end

@@ -17,7 +17,5 @@
   = f.label :image_url, class: 'control-label'
   %br/
   = f.text_field :image_url, class: "form-control"
-.col-md-4
-.col-md-4
-  = f.submit "#{controller.action_name == 'new' || controller.action_name == 'create' ? 'Create post' : 'Update post'}", class: "btn btn-success"
-.col-md-4
+
+= f.button "#{controller.action_name == 'new' || controller.action_name == 'create' ? ' create post' : ' update post'}", class: "btn btn-info fa fa-pencil-square", type: 'submit'

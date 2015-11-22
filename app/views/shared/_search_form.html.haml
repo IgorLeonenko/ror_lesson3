@@ -1,15 +1,15 @@
 = form_tag (controller.controller_name == 'posts' ? user_posts_path : root_path), :method => 'get', class: "form-inline" do
   .form-group
-    = text_field_tag :search, params[:search], class: "form-control"
-  = button_tag "Search", class: "btn btn-info"
-  = link_to 'Reset', controller.controller_name == 'posts' ? user_posts_path : root_path, class: "btn btn-danger"
+    = text_field_tag :search, params[:search], placeholder: 'by title or body text', class: "form-control"
+  = button_tag " search", class: "btn btn-info fa fa-search"
+  = link_to ' reset', controller.controller_name == 'posts' ? user_posts_path : root_path, class: "btn btn-danger fa fa-reply"
   - unless controller.controller_name == 'posts'
     .pull-right
       - if params[:popular].present?
-        = link_to 'All posts', root_path, class: "btn btn-success"
+        = link_to ' all posts', root_path, class: "btn btn-info fa fa-reply"
       - else
-        = link_to 'Popular posts', root_path(popular: true), class: "btn btn-success"
+        = link_to ' popular posts', root_path(popular: true), class: "btn btn-info fa fa-bullseye"
       - if params[:active].present?
-        = link_to 'All posts', root_path, class: "btn btn-success"
+        = link_to ' all posts', root_path, class: "btn btn-info fa fa-reply"
       - else
-        = link_to 'Active posts', root_path(active: true), class: "btn btn-success"
+        = link_to ' active posts', root_path(active: true), class: "btn btn-info fa fa-bolt"

@@ -1,59 +1,53 @@
-%h1{id: "close-comment-#{@post.id}"}
-  = gravatar_for @post.user
-  Post
-  %i= @post.title
-  %br/
+.bs-callout
+  %span.pull-right.text-primary
+    %i Tags:
+    - @post.tag_list.each do |tag|
+      = link_to "#{tag}", root_path(tag: "#{tag if current_user}"), class: "btn btn-xs btn-default"
+  %h2{id: "close-comment-#{@post.id}", style:"margin-bottom: 10px;"}
+    = gravatar_for @post.user
+    %i= @post.title
   %small
     Created: #{@post.created_at.strftime("%d %b %Y")}
   %br/
   - if current_user
-    %small
-      Author: #{@post.user_id == current_user.id ? 'I\'am' : @post.user.name.capitalize}
+    Author: #{@post.user_id == current_user.id ? 'I\'am' : @post.user.name.capitalize}
   - else
-    %small
-      Author: #{@post.user.name.capitalize}
-%h5.text-primary
-  %strong Tags:
-  %i= @post.tag_list.join(',')
-%span.fa.fa-thumbs-up.text-primary
-  %span{id: "like-#{@post.id}"}
-    - if @post.like_count != 0
-      = @post.like_count
-    - else
-      0
-|
-%span.fa.fa-thumbs-down.text-danger
-  %span{id: "dislike-#{@post.id}"}
-    - if @post.dislike_count != 0
-      = @post.dislike_count
-    - else
-      0
-.bs-callout
+    Author: #{@post.user.name.capitalize}
   - if !@post.image_url.blank?
-    = image_tag "#{@post.image_url}", width: "100%"
+    = image_tag "#{@post.image_url}", width: "100%", style: "margin-top: 10px;"
   %h4= @post.body
-.row
-  .col-md-12
-    - if current_user
-      = link_to 'add comment', "#new-comment-#{@post.id}", class: "scroll btn-sm btn-success comment-#{@post.id}", onclick: "$('#new-comment-#{@post.id}').show();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
-      |
-    - if current_user && @post.user_id == current_user.id
-      = link_to 'Edit', edit_user_post_path(current_user.id, @post), class: "btn-sm btn-success"
-      |
-      = link_to 'Back to posts', user_posts_path, class: "btn-sm btn-info"
-    - else
-      = link_to 'Back', root_path, class: "btn-sm btn-info"
-- if @post.comments.size !=0
-  .row{ class: "comments-#{@post.id}" }
-    .col-md-1{ style: 'width:2.333333%' }
-    .col-md-8
-      %h4
-        Comments:
-      - @post.comments.each do |comment|
-        = render partial: 'comments/comment', locals: { comment: comment, post: @post }
-- if current_user
-  .row{ style: "margin-bottom: 10px", id: "new-comment-#{@post.id}", class: "comment-form" }
-    .col-md-1
-    .col-md-6
-      = form_for [current_user, @post, @comment] do |f|
-        = render partial: "comments/form", locals: { :f => f, post: @post, c: @comment }
+  .row
+    .col-md-12
+      - if current_user
+        = link_to ' comment', "#new-comment-#{@post.id}", class: "scroll comment-#{@post.id} fa fa-comments-o btn btn-info", onclick: "$('#new-comment-#{@post.id}').show();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+      - if current_user && @post.user_id == current_user.id
+        = link_to ' edit', edit_user_post_path(current_user.id, @post), class: "btn btn-info fa fa-file-text"
+      = link_to ' back', root_path, class: "btn btn-info fa fa-circle-o-notch"
+      %span.pull-right
+        - if current_user
+          = like_thumb(current_user, @post)
+          = dislike_thumb(current_user, @post)
+        - else
+          %span.fa.fa-thumbs-up.text-primary
+            = like_dislike(like=true, @post)
+          %span.fa.fa-thumbs-down.text-danger
+            = like_dislike(like=false, @post)
+  - if @post.comments.size !=0
+    .row{ class: "comments-#{@post.id}" }
+      .col-md-1{ style: 'width:2.333333%' }
+      .col-md-8
+        %h4
+          Comments:
+        - @post.comments.each do |comment|
+          = render partial: 'comments/comment', locals: { comment: comment, post: @post }
+  - if current_user
+    .row{ id: "new-comment-#{@post.id}", class: "comment-form" }
+      .col-md-1
+      .col-md-6
+        = form_for [current_user, @post, @comment] do |f|
+          = render partial: "comments/form", locals: { :f => f, post: @post, c: @comment }
+
+:javascript
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });

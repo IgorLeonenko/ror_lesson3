@@ -1,9 +1,9 @@
 .form-group
   = f.text_area :body, rows: 5, placeholder: 'add comment here. minimum 100 chars', class: "form-control"
-.col-md-3{ style: "padding-left: 0;" }
+.col-md-3
   = f.submit "#{ c.persisted? ? 'Update' : 'Comment'}", class: "btn btn-success"
-.col-md-3{ style: "padding-left: 0;" }
+.col-md-3
   - if c.persisted?
     = link_to 'Cancel', "#close-comment-#{c.id}", class: " scroll btn btn-danger", onclick:"$('#update-comment-#{c.id}').hide();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
   - else
-    = link_to 'Cancel',  "#close-comment-#{post.id}", class: " scroll btn btn-danger", onclick:"$('#new-comment-#{post.id}').hide(); $('.comment-#{post.id}').show();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+    = link_to 'Cancel',  "#close-comment-#{post.id}", class: " scroll btn btn-danger", onclick:"$('#new-comment-#{post.id}').hide();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true

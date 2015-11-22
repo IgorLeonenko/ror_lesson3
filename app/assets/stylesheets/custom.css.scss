@@ -23,7 +23,8 @@
 
 /* universal */
 body {
-  padding-top: 60px;
+  padding: 60px 0 0 0;
+  background: url('blog-background.jpg') 100% center fixed;
 }
 
 section {
@@ -40,6 +41,9 @@ textarea {
     margin-bottom: 10px;
   }
 }
+.jumbotron {
+  background-color: rgba(255,255,255,0.6);
+}
 
 /* typography */
 
@@ -50,16 +54,14 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
-  margin-bottom: 30px;
 }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 1.5em;
   letter-spacing: -1px;
   margin-bottom: 30px;
-  text-align: center;
   font-weight: normal;
-  color: #777;
+  color: #808080;
 }
 
 p {
@@ -70,27 +72,20 @@ p {
 /* footer */
 
 footer {
-  margin-top: 20px;
+  margin-top: 10px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
-  a {
-    color: #555;
-    &:hover {
-      color: #222;
-    }
-  }
-  small {
-    float: left;
-  }
   ul {
-    float: right;
     list-style: none;
+    margin-top: 9px;
     li {
       float: left;
       margin-left: 15px;
     }
   }
+}
+.navbar-bottom {
+  background-color: rgba(34,34,34,0.9);
+  margin-bottom: 0;
 }
 
 /* forms */
@@ -147,30 +142,21 @@ aside {
   margin-top: 15px;
 }
 
-.bs-callout {
+.bs-callout, .media {
+  background-color: rgba(255,255,255,0.6);
   padding: 20px;
   margin: 20px 0;
   border: 1px solid #eee;
-  border-left-width: 5px;
-  border-left-color: #1b809e;
   border-radius: 3px;
-}
-
-.media {
-  border-bottom: 1px dashed black;
-  .media-body {
-    /*height: 55px;*/
-  }
 }
 
 .modal-dialog {
   a:link {
     background-color: transparent;
   }
-}
-
-a.likes, a.dislikes{
-  background-color: transparent !important;
+  .modal-header {
+    border:none;
+  }
 }
 
 .comment-form {
@@ -186,10 +172,11 @@ a.likes, a.dislikes{
     width: 50px;
     height: 50px;
   }
-}
-.comment:last-child {
-  .media {
-    border: none;
+  .comment-form {
+    margin-bottom: 10px;
+    .col-md-3 {
+      padding-left: 0;
+    }
   }
 }
 .comment-form.row{
@@ -198,4 +185,23 @@ a.likes, a.dislikes{
 
 a.btn-xs:visited{
   color: #333333;
+}
+
+.table-bordered > tbody > tr > td, .table-bordered > thead > tr > th, .table-bordered{
+  border: 1px solid #696969;
+}
+.table > thead > tr.info > th {
+  background-color: rgba(47,79,79,0.6);
+}
+
+.table > thead > tr.info > th:last-child {
+  width:  20.6%;
+}
+
+.controls {
+  margin-bottom: 40px;
+}
+
+.comments {
+  margin-top: 60px;
 }

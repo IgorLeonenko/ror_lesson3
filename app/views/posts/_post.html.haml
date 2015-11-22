@@ -1,12 +1,12 @@
 .media{id:"close-comment-#{post.id}"}
   .media-left
-    %h4.media-heading
-      %span= post.title
+    .media-heading
+      %h3
+        = post.title
       %p
         %small
           Author:
           %i= post.user.name.capitalize
-        %br/
         %small
           Created:
           = post.created_at.strftime("%d %b. %Y")
@@ -18,24 +18,27 @@
     - if !post.image_url.blank?
       = image_tag "#{post.image_url}", width: "100%", style: "float:left; width: 40%; padding: 0 20px 10px 0"
     = post.body.truncate(1000)
-  %ul.list-inline.pull-left
-    %li
+  .controls
+    %ul.list-inline.pull-left
+      %li
+        - if current_user
+          = link_to ' comment', "#new-comment-#{post.id}", class: "scroll comment-#{post.id} fa fa-comments-o btn btn-info", onclick: "$('#new-comment-#{post.id}').show();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+      %li
+        = link_to ' read more', user_post_path(post.user.id, post), class: 'fa fa-eye btn btn-info'
+    %span.pull-right
       - if current_user
-        = link_to ' comment', "#new-comment-#{post.id}", class: "scroll comment-#{post.id} fa fa-pencil-square-o btn btn-info", onclick: "$('#new-comment-#{post.id}').show();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
-    %li
-      = link_to ' read more', user_post_path(post.user.id, post), class: 'fa fa-eye btn btn-info'
-  %span.pull-right
-    - if current_user
-      = like_thumb(current_user, post)
-      = dislike_thumb(current_user, post)
-    - else
-      %span.fa.fa-thumbs-up.text-primary
-        = like_dislike(like=true, post)
-      %span.fa.fa-thumbs-down.text-danger
-        = like_dislike(like=false, post)
+        = like_thumb(current_user, post)
+        = dislike_thumb(current_user, post)
+      - else
+        %a.btn.btn-info
+          %span.fa.fa-thumbs-up.text-primary
+          = like_dislike(like=true, post)
+        %a.btn.btn-danger
+          %span.fa.fa-thumbs-down.text-danger
+          = like_dislike(like=false, post)
 
   - if post.comments.size !=0
-    .row{ class: "comments-#{post.id}", style: "margin-top: 40px;" }
+    .row{ class: "comments comments-#{post.id}" }
       .col-md-1
       .col-md-8
         %h4
