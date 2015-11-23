@@ -12,8 +12,8 @@
       Likes: #{@user.like}
   .media-body
     .col-md-6
-      %h1
-        User posts
+      %h1.fa.fa-list-alt
+        Posts list
       - if @user_posts.size == 0
         %h2
           No post found
@@ -24,8 +24,8 @@
           - unless @user.posts.size < 5
             = link_to ' show all', profile_path(@user, all_posts: true), remote: true, class: 'fa fa-eye btn btn-sm btn-info'
     .col-md-6
-      %h1
-        User favorite posts
+      %h1.fa.fa-star-o
+        Favorite posts list
       - if @user_favorite_posts.size == 0
         %h2
           No post found
