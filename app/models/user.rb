@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :posts, through: :tags, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :tags
+  has_many :favorites
 
   validates_presence_of :email, :name
   validates :name, length: {maximum: 51}

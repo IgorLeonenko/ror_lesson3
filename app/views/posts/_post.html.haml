@@ -25,6 +25,12 @@
           = link_to ' comment', "#new-comment-#{post.id}", class: "scroll comment-#{post.id} fa fa-comments-o btn btn-info", onclick: "$('#new-comment-#{post.id}').show();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
       %li
         = link_to ' read more', user_post_path(post.user.id, post), class: 'fa fa-eye btn btn-info'
+      %li{ class: "favorite-#{post.id}"}
+        - if current_user
+          - if !post.favorite?(current_user)
+            = link_to ' add to favorite', favorite_path(post.user.id, post), class: 'fa fa-star-o btn btn-info', method: :post, remote: true
+          - else
+            = link_to ' remove from favorite', unfavorite_path(post.user.id, post), class: 'fa fa-star btn btn-info', method: :delete, remote: true
     %span.pull-right
       - if current_user
         = like_thumb(current_user, post)

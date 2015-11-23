@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :post_tags
   has_many :tags, through: :post_tags
+  has_many :favorites
 
   validates_presence_of :title, :body, :user_id
   validates :title, uniqueness: true, length: { in: 5..140 }
@@ -35,6 +36,10 @@ class Post < ActiveRecord::Base
     self.tags = names.split(",").map do |n|
       Tag.where(name: n.strip).first_or_create
     end
+  end
+
+  def favorite?(current_user)
+    Favorite.find_by(post_id: self.id, user_id: current_user.id).present? if current_user
   end
 
   def self.find_by_params(params, current_user)

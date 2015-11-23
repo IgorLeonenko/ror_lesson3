@@ -1,0 +1,1 @@
+$(".favorite-<%= @post.id %>").html("<a class='fa fa-star-o btn btn-info' data-remote='true' rel='nofollow' data-method='post' href='/favorite/<%=current_user.id%>/<%=@post.id%>'> add to favorite</a>")

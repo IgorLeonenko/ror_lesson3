@@ -1,0 +1,5 @@
+- if @favorites.length == 0
+  %h3 No posts found
+- else
+  - @favorites.map do |favorite|
+    = render partial: 'post', locals: {post: favorite.post, current_user: current_user}

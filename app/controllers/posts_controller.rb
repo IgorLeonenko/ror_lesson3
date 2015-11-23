@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   include JsonFormat
 
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :favorite_post, :unfavorite_post]
   before_action :user_check, only: [:edit, :update, :destroy]
   skip_before_action :authorization, only: :show
 
@@ -66,6 +66,22 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:notice] = 'Post was successfully destroyed!'
     redirect_to user_posts_path
+  end
+
+  def favorite_posts
+    @comment = Comment.new
+    @favorites = Favorite.where(user:current_user)
+  end
+
+  def favorite_post
+    favorite = current_user.favorites.build
+    favorite.post_id = @post.id
+    favorite.save
+  end
+
+  def unfavorite_post
+    favorite = Favorite.find_by(post: @post, user: current_user)
+    favorite.destroy
   end
 
   private

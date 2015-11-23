@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   post 'likes/:id/:user_id' => 'likes#like_post', as: 'like'
   post 'dislikes/:id/:user_id' => 'likes#dislike_post', as: 'dislike'
 
+  get 'favorite_posts' => 'posts#favorite_posts', as: 'favorite_posts'
+  post 'favorite/:user_id/:id' => 'posts#favorite_post', as: 'favorite'
+  delete 'unfavorite/:user_id/:id' => 'posts#unfavorite_post', as: 'unfavorite'
+
   resources :users do
     resources :posts do
       resources :comments, only: [ :create, :update, :destroy ]
