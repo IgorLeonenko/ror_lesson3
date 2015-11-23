@@ -28,9 +28,11 @@
           = like_thumb(current_user, @post)
           = dislike_thumb(current_user, @post)
         - else
-          %span.fa.fa-thumbs-up.text-primary
+          %a.btn.btn-info
+            %span.fa.fa-thumbs-up.text-primary
             = like_dislike(like=true, @post)
-          %span.fa.fa-thumbs-down.text-danger
+          %a.btn.btn-danger
+            %span.fa.fa-thumbs-down.text-danger
             = like_dislike(like=false, @post)
   - if @post.comments.size !=0
     .row{ class: "comments-#{@post.id}" }
