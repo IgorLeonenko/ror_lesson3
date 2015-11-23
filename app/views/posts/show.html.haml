@@ -22,7 +22,7 @@
         = link_to ' comment', "#new-comment-#{@post.id}", class: "scroll comment-#{@post.id} fa fa-comments-o btn btn-info", onclick: "$('#new-comment-#{@post.id}').show();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
       - if current_user && @post.user_id == current_user.id
         = link_to ' edit', edit_user_post_path(current_user.id, @post), class: "btn btn-info fa fa-file-text"
-      = link_to ' back', root_path, class: "btn btn-info fa fa-circle-o-notch"
+      = link_to ' back', :back, class: "btn btn-info fa fa-circle-o-notch"
       %span.pull-right
         - if current_user
           = like_thumb(current_user, @post)
