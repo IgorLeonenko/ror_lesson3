@@ -1,0 +1,6 @@
+.bs-callout
+  %ul.media-list
+    %li= user_favorite_post.title
+    %li= image_tag user_favorite_post.image_url, width: '40%' unless user_favorite_post.image_url.blank?
+    %li= user_favorite_post.body.truncate(200)
+    %li= link_to ' read more', user_post_path(@user.id, user_favorite_post.id), class: 'fa fa-eye btn btn-sm btn-info'

@@ -142,6 +142,12 @@ aside {
   }
 }
 
+.media.user {
+  h2 {
+    margin: 0;
+  }
+}
+
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -213,4 +219,8 @@ a.btn-xs:visited{
 
 .comments {
   margin-top: 60px;
+}
+
+.posts-link {
+  margin-bottom: 10px;
 }

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   post 'favorite/:user_id/:id' => 'posts#favorite_post', as: 'favorite'
   delete 'unfavorite/:user_id/:id' => 'posts#unfavorite_post', as: 'unfavorite'
 
+  get "users/profile/:name" => 'users#profile', as: 'profile'
+
   resources :users do
     resources :posts do
       resources :comments, only: [ :create, :update, :destroy ]

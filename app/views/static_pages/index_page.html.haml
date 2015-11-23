@@ -9,4 +9,5 @@
 - else
   - @posts.each do |post|
     = render partial: "posts/post", locals: { :post => post }
-  = paginate @posts, :theme => 'twitter-bootstrap-3', :pagination_class => 'pagination-sm' if current_user
+  - unless params[:active].present?
+    = paginate @posts, :theme => 'twitter-bootstrap-3', :pagination_class => 'pagination-sm' if current_user

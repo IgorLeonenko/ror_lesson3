@@ -1,0 +1,41 @@
+.media.user
+  .media-left
+    %h1= "#{ current_user.id == @user.id ? 'My' : @user.name.capitalize } profile"
+    = gravatar_for @user
+    %h2
+      Name: #{@user.name.capitalize}
+    %h2
+      Email: #{@user.email}
+    %h2
+      Rating:
+    %h2
+      Likes:
+  .media-body
+    .col-md-6
+      %h1
+        User posts
+      - if @user_posts.size == 0
+        %h2
+          No post found
+      - else
+        .posts
+          = render partial: 'user_post', collection: @user_posts
+        .posts-link
+          - unless @user.posts.size < 5
+            = link_to ' show all', profile_path(@user, all_posts: true), remote: true, class: 'fa fa-eye btn btn-sm btn-info'
+    .col-md-6
+      %h1
+        User favorite posts
+      - if @user_favorite_posts.size == 0
+        %h2
+          No post found
+      - else
+        .favorite-posts
+          = render partial: 'user_favorite_post', collection: @user_favorite_posts
+        .favorite-posts-link
+          - unless @user.favorites.size < 5
+            = link_to ' show all', profile_path(@user.name, all_favorites: true), remote: true, class: 'fa fa-eye btn btn-sm btn-info'
+  - if current_user == @user
+    = link_to ' edit profile', edit_user_path(current_user), class: "btn btn-info fa fa-file-text"
+    = link_to ' my posts', user_posts_path(current_user), class: "btn btn-info fa fa-bars"
+  = link_to ' back', :back, class: "btn btn-info fa fa-circle-o-notch", style: "#{ current_user == @user ? '' : 'margin-top: 15px;'}"

@@ -4,7 +4,8 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :post_tags
   has_many :tags, through: :post_tags
-  has_many :favorites
+  has_many :favorite_posts
+  has_many :favorited_by, through: :favorite_posts, source: :user
 
   validates_presence_of :title, :body, :user_id
   validates :title, uniqueness: true, length: { in: 5..140 }
@@ -14,7 +15,7 @@ class Post < ActiveRecord::Base
                       allow_blank: true
 
   default_scope  { order(created_at: :desc) }
-  scope :popular, -> { unscoped.select('posts.*').joins(:likes).group('posts.id').having('count(posts.id) > 9') }
+  scope :popular, -> { unscoped.select('posts.*').joins(:likes).where(likes: { like:true }).group('posts.id').having('count(posts.id) > 9') }
 
   def self.search(search)
     where('body LIKE :query OR title LIKE :query', query: "%#{search}%")
@@ -38,17 +39,17 @@ class Post < ActiveRecord::Base
     end
   end
 
-  def favorite?(current_user)
-    Favorite.find_by(post_id: self.id, user_id: current_user.id).present? if current_user
+  def favorited?(current_user)
+    FavoritePost.find_by(post_id: self.id, user_id: current_user.id).present?
   end
 
   def self.find_by_params(params, current_user)
     posts = Post.all
     posts = posts.popular.limit(30) if current_user && params[:popular].present?
-    posts = posts.unscoped.order(updated_at: :desc) if current_user && params[:active].present?
+    posts = posts.unscoped.order(updated_at: :desc).limit(15) if current_user && params[:active].present?
     posts = posts.joins(:tags).where(tags: {name: params[:tag]}) if current_user && params[:tag].present?
     posts = posts.search(params[:search]) if current_user && params[:search].present?
-    posts = posts.page(params[:page]).per(10)
+    posts = posts.page(params[:page]).per(10) unless params[:active].present?
     posts
   end
 end

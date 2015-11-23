@@ -21,8 +21,8 @@
           %td= post.like_count
           %td= post.dislike_count
           %td
-            = link_to ' show', user_post_path(current_user.id, post), class: "btn-sm btn-info fa fa-eye"
-            = link_to ' edit', edit_user_post_path(current_user.id, post), class: "btn-sm btn-warning fa fa-file-text"
-            = link_to ' destroy', user_post_path(current_user.id, post), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-sm btn-danger fa fa-times"
+            = link_to ' show', user_post_path(current_user, post), class: "btn-sm btn-info fa fa-eye"
+            = link_to ' edit', edit_user_post_path(current_user, post), class: "btn-sm btn-warning fa fa-file-text"
+            = link_to ' destroy', user_post_path(current_user, post), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-sm btn-danger fa fa-times"
   = link_to ' new post', new_user_post_path, class: "btn btn-info fa fa-file-text"
   = link_to ' back', user_path(current_user.id), class: "btn btn-info fa fa-circle-o-notch"

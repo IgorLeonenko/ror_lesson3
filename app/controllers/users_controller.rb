@@ -2,7 +2,17 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   skip_before_action :authorization, only: [:new, :create]
 
+  def index
+    @users = User.all.page(params[:page]).per(6)
+  end
+
   def show
+  end
+
+  def profile
+    @user = User.find_by_name(params[:name])
+    @user_posts = params[:all_posts].present? ? @user.posts : @user.posts.limit(5)
+    @user_favorite_posts = params[:all_favorites].present? ? @user.favorites : @user.favorites.limit(5)
   end
 
   def new
@@ -47,7 +57,7 @@ class UsersController < ApplicationController
   private
 
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by_name(params[:id])
     end
 
     def user_params

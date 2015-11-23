@@ -2,4 +2,4 @@
   %h3 No posts found
 - else
   - @favorites.map do |favorite|
-    = render partial: 'post', locals: {post: favorite.post, current_user: current_user}
+    = render partial: 'post', locals: {post: favorite, current_user: current_user}

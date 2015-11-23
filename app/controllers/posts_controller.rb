@@ -70,18 +70,15 @@ class PostsController < ApplicationController
 
   def favorite_posts
     @comment = Comment.new
-    @favorites = Favorite.where(user:current_user)
+    @favorites = current_user.favorites
   end
 
   def favorite_post
-    favorite = current_user.favorites.build
-    favorite.post_id = @post.id
-    favorite.save
+    current_user.favorites << @post
   end
 
   def unfavorite_post
-    favorite = Favorite.find_by(post: @post, user: current_user)
-    favorite.destroy
+    current_user.favorites.delete(@post)
   end
 
   private

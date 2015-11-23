@@ -10,9 +10,10 @@
               My actions
               %span.caret
             %ul.dropdown-menu
-              %li= link_to 'My account', user_path(current_user.id)
-              %li= link_to 'My posts', user_posts_path(current_user.id)
+              %li= link_to 'My account', user_path(current_user)
+              %li= link_to 'My posts', user_posts_path(current_user)
               %li= link_to 'Favorite posts', favorite_posts_path
-          %li= link_to "Logout (#{current_user.email})", session_path(current_user.id), method: :delete
+              %li= link_to 'Users list', users_path
+          %li= link_to "Logout (#{current_user.email})", session_path(current_user), method: :delete
         - else
           %li= link_to 'Login', new_session_path

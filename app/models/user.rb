@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  has_many :posts, through: :tags, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :favorites
+  has_many :favorite_posts
+  has_many :favorites, through: :favorite_posts, source: :post
 
   validates_presence_of :email, :name
   validates :name, length: {maximum: 51}
@@ -19,5 +20,13 @@ class User < ActiveRecord::Base
 
   def dislike?(post)
     Like.where(post_id: post.id, dislike: true, user_id: self.id).size > 0
+  end
+
+  def like
+    Like.where(like: true, user_id: self.id).size
+  end
+
+  def to_param
+    name
   end
 end
