@@ -23,8 +23,12 @@
 
 /* universal */
 body {
-  padding: 60px 0 0 0;
-  background: url("<%= asset_path('blog-background.jpg') %>") 100% center fixed;
+  padding: 60px 0;
+  background: asset_url('background.jpg') center center no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 section {
@@ -64,6 +68,10 @@ h2 {
   color: #808080;
 }
 
+/*h3 {
+  color: #A52A2A;
+}*/
+
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -83,7 +91,7 @@ footer {
     }
   }
 }
-.navbar-bottom {
+.navbar-fixed-bottom {
   background-color: rgba(34,34,34,0.9);
   margin-bottom: 0;
 }
