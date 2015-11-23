@@ -23,10 +23,19 @@ class User < ActiveRecord::Base
   end
 
   def like
-    Like.where(like: true, user_id: self.id).size
+    self.likes.where(like: true).size
   end
 
   def to_param
     name
   end
+
+  def rating
+    post = self.posts.size
+    comment = self.comments.size
+    like = self.likes.where(like: true).size
+    dislike = self.likes.where(dislike: true).size
+    post + like + comment - dislike
+  end
+
 end

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   skip_before_action :authorization, only: [:new, :create]
 
   def index
-    @users = User.all.page(params[:page]).per(6)
+    @users = Kaminari.paginate_array(User.all.sort_by(&:rating).reverse).page(params[:page]).per(6)
   end
 
   def show
