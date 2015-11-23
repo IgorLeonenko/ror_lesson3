@@ -18,3 +18,10 @@
 $(document).ready(function(){
   $('.fade-in').fadeOut(3500);
 })
+$(window).scroll(function() {
+   if($(window).scrollTop() + window.innerHeight == $(document).height()) {
+      $('.navbar-fixed-bottom').show();
+   }else{
+      $('.navbar-fixed-bottom').hide();
+   }
+});
