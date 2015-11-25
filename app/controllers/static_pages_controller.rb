@@ -16,7 +16,7 @@ class StaticPagesController < ApplicationController
 
   def set_posts
     if current_user
-      @posts = Post.find_by_params(params, current_user)
+      @posts = Post.find_by_params(params)
     else
       @posts = Post.all.limit(10)
     end

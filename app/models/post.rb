@@ -43,12 +43,12 @@ class Post < ActiveRecord::Base
     FavoritePost.find_by(post_id: self.id, user_id: current_user.id).present?
   end
 
-  def self.find_by_params(params, current_user)
+  def self.find_by_params(params)
     posts = Post.all
-    posts = posts.popular.limit(30) if current_user && params[:popular].present?
-    posts = posts.unscoped.order(updated_at: :desc).limit(15) if current_user && params[:active].present?
-    posts = posts.joins(:tags).where(tags: {name: params[:tag]}) if current_user && params[:tag].present?
-    posts = posts.search(params[:search]) if current_user && params[:search].present?
+    posts = posts.popular.limit(30) if params[:popular].present?
+    posts = posts.unscoped.order(updated_at: :desc).limit(15) if params[:active].present?
+    posts = posts.joins(:tags).where(tags: {name: params[:tag]}) if params[:tag].present?
+    posts = posts.search(params[:search]) if params[:search].present?
     posts = posts.page(params[:page]).per(10) unless params[:active].present?
     posts
   end
