@@ -15,11 +15,11 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
 
   def like?(post)
-    Like.where(post_id: post.id, like: true, user_id: self.id).size > 0
+    self.likes.where(post_id: post.id, like: true).size > 0
   end
 
   def dislike?(post)
-    Like.where(post_id: post.id, dislike: true, user_id: self.id).size > 0
+    self.likes.where(post_id: post.id, dislike: true).size > 0
   end
 
   def like

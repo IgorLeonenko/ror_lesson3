@@ -22,11 +22,11 @@ class Post < ActiveRecord::Base
   end
 
   def like_count
-    Like.where(like: true, post_id: self.id).size
+    self.likes.where(like: true).size
   end
 
   def dislike_count
-    Like.where(dislike: true, post_id: self.id).size
+    self.likes.where(dislike: true).size
   end
 
   def tag_list
