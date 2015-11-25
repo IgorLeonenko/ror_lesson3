@@ -1,20 +1,13 @@
 module PostsHelper
-  def like_count(post)
-    post.like_count != 0 ? post.like_count : '0'
-  end
-
-  def dislike_count(post)
-    post.dislike_count != 0 ? post.dislike_count : '0'
-  end
 
   def like_dislike(like, post)
     if like
       "<span class='text-primary' id='like-#{post.id}'>
-        #{like_count(post)}
+        #{post.like_count}
       </span>".html_safe
     else
       "<span class='text-danger' id='dislike-#{post.id}'>
-      #{dislike_count(post)}
+      #{post.dislike_count}
       </span>".html_safe
     end
   end
