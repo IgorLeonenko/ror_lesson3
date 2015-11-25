@@ -11,6 +11,6 @@ class Comment < ActiveRecord::Base
   private
 
     def update_post
-      self.post.update_attributes(updated_at: Time.now)
+      self.post.update_attribute(:updated_at, Time.now)
     end
 end
