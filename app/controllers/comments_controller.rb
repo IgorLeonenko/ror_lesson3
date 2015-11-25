@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
 
   before_action :set_post
   before_action :set_comment, only: [:update, :destroy]
+  before_action :user_check, only: [:update, :destroy]
 
   def create
     @comment = Comment.new(comment_params)
@@ -44,6 +45,13 @@ class CommentsController < ApplicationController
 
     def check_path
       redirect_to URI(request.referrer).path == user_post_path(current_user.id, @post.id) ? user_post_path(current_user.id, @post.id) : root_path
+    end
+
+    def user_check
+      unless @comment.user_id == current_user.id
+        flash[:alert] = 'You are not author!'
+        redirect_to root_path
+      end
     end
 
     def comment_params
