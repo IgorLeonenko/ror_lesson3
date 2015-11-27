@@ -21,7 +21,15 @@ $(document).ready(function(){
 $(window).scroll(function() {
    if($(window).scrollTop() + window.innerHeight == $(document).height()) {
       $('.navbar-fixed-bottom').show();
+      $('.top-button').show();
    }else{
       $('.navbar-fixed-bottom').hide();
+      $('.top-button').hide();
+   }
+
+   if($(window).scrollTop() > $('body').height() / 2) {
+      $('.top-button').show();
+   }else{
+      $('.top-button').hide();
    }
 });

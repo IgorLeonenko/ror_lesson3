@@ -7,8 +7,10 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    %span#top
     = render 'layouts/header'
     .container{style:"min-height: 560px;"}
+      = link_to ' top', '#top', class: 'scroll btn btn-info top-button fa fa-arrow-up', 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
       - if session[:modal] == 1
         = render 'shared/changes_modal'
       - if session[:count] == 10
