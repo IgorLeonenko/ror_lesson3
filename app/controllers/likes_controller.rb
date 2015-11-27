@@ -4,7 +4,7 @@ class LikesController < ApplicationController
     @like =  Like.find_by(user_id: current_user.id, post_id: @post.id)
     unless current_user.id == @post.user_id
       if current_user.dislike?(@post) && @post.dislike_count > 0
-        @like.update_attributes(like: true, dislike: false)
+        @like.update_attributes(like: true)
       else
         @like = Like.new(user_id: current_user.id, post_id: @post.id, like: true)
         @like.save
@@ -17,9 +17,9 @@ class LikesController < ApplicationController
     @like =  Like.find_by(user_id: current_user.id, post_id: @post.id)
     unless current_user.id == @post.user_id
       if current_user.like?(@post) && @post.like_count > 0
-        @like.update_attributes(like: false, dislike: true)
+        @like.update_attributes(like: false)
       else
-        @like = Like.new(user_id: current_user.id, post_id: @post.id, dislike: true)
+        @like = Like.new(user_id: current_user.id, post_id: @post.id, like: false)
         @like.save
       end
     end

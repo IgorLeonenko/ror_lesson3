@@ -26,7 +26,7 @@ class Post < ActiveRecord::Base
   end
 
   def dislike_count
-    self.likes.where(dislike: true).size
+    self.likes.where(like: false).size
   end
 
   def tag_list

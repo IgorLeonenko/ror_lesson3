@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def dislike?(post)
-    self.likes.where(post_id: post.id, dislike: true).size > 0
+    self.likes.where(post_id: post.id, like: false).size > 0
   end
 
   def like
@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
     post = self.posts.size
     comment = self.comments.size
     like = self.likes.where(like: true).size
-    dislike = self.likes.where(dislike: true).size
+    dislike = self.likes.where(like: false).size
     post + like + comment - dislike
   end
 
