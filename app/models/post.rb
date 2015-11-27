@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
                       allow_blank: true
 
   default_scope  { order(created_at: :desc) }
-  scope :popular, -> { unscoped.select('posts.*').joins(:likes).where(likes: { like:true }).group('posts.id').having('count(posts.id) > 9') }
+  scope :popular, -> { unscoped.joins(:likes).where(likes: { like:true }).group('posts.id').having('count(posts.id) > 9') }
 
   def self.search(search)
     where('body LIKE :query OR title LIKE :query', query: "%#{search}%")
