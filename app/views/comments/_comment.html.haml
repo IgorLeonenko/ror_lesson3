@@ -14,9 +14,21 @@
       = comment.body
       - if current_user && current_user.id == comment.user.id
         %p
-          = link_to 'Update', "#update-comment-#{comment.id}", onclick: "$('#update-comment-#{comment.id}').show();", class: 'scroll', 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+          %span.clock{ class: "update-comment-#{comment.id}" }
+          %br/
+          = link_to ' edit', "#update-comment-#{comment.id}", onclick: "$('#update-comment-#{comment.id}').show();", class: "scroll update-comment-#{comment.id} btn btn-sm btn-info fa fa-file-text", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
     .col-md-1
     .col-md-8{ id: "update-comment-#{comment.id}", class: "comment-form" }
       - if current_user
         = form_for [comment.user, comment.post, comment], method: :patch, remote: true do |f|
           = render partial: "comments/form", locals: { f: f, post: post, c: comment }
+
+:javascript
+  $("span.clock.update-comment-#{comment.id}").countdown("#{ comment.created_at + 5.minute }").on('update.countdown', function(event) {
+    var format = '%M:%S';
+    $(this).html('After '+event.strftime(format)+' you can\'t edit comment');
+  }).on('finish.countdown', function(event){
+    $(this).remove();
+    $(".update-comment-#{comment.id}").remove();
+    $("#update-comment-#{comment.id}").remove();
+  });
