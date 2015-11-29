@@ -1,0 +1,10 @@
+<% if @comment.errors.any? %>
+
+<% else %>
+  $("#close-comment-<%= @comment.id %>").fadeOut(1500, function() {
+    $("#close-comment-<%= @comment.id %>").remove();
+    <% if @post.comments.size == 0 %>
+      $(".comments-post-<%= @post.id %> h4").html('');
+    <% end %>
+  });
+<% end %>

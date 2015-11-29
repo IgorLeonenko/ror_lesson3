@@ -1,0 +1,9 @@
+<% if @comment.errors.any? %>
+  $("#new-comment-<%= @post.id %> form .help-inline").html("<%= raw @comment.errors.full_messages.join(', ') %>");
+  $("#new-comment-<%= @post.id %> form .form-group").addClass('has-error');
+<% else %>
+  $(".comments-post-<%= @post.id %> h4").html('Comments:');
+  $(".comments-post-<%= @post.id %>").append("<%= j render partial: 'comments/comment', locals: { comment: @comment, post: @post } %>").hide().fadeIn(1500);
+  $("#new-comment-<%= @post.id %>").hide();
+  $("#new-comment-<%= @post.id %> form")[0].reset();
+<% end %>

@@ -34,19 +34,18 @@
           %a.btn.btn-danger
             %span.fa.fa-thumbs-down.text-danger
             = like_dislike(like=false, @post)
-  - if @post.comments.size !=0
-    .row{ class: "comments-#{@post.id}" }
-      .col-md-1{ style: 'width:2.333333%' }
-      .col-md-8
-        %h4
+  .row{ class: "comments" }
+    .col-md-8{ class: "comments-post-#{@post.id}" }
+      %h4
+        - if @post.comments.any?
           Comments:
-        - @post.comments.each do |comment|
-          = render partial: 'comments/comment', locals: { comment: comment, post: @post }
+      - @post.comments.each do |comment|
+        = render partial: 'comments/comment', locals: { comment: comment, post: @post }
   - if current_user
     .row{ id: "new-comment-#{@post.id}", class: "comment-form" }
       .col-md-1
       .col-md-6
-        = form_for [current_user, @post, @comment] do |f|
+        = form_for [current_user, @post, @comment], remote: true do |f|
           = render partial: "comments/form", locals: { :f => f, post: @post, c: @comment }
 
 :javascript

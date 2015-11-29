@@ -1,0 +1,7 @@
+<% if @comment.errors.any? %>
+  $("#update-comment-<%= @comment.id %> form .help-inline").html("<%= raw @comment.errors.full_messages.join(', ') %>");
+  $("#update-comment-<%= @comment.id %> form .form-group").addClass('has-error');
+<% else %>
+  $("#close-comment-<%= @comment.id %>").html("<%= j render partial: 'comments/comment', locals: { comment: @comment, post: @post } %>").hide().fadeIn(1500);
+  $("#update-comment-<%= @comment.id %>").hide();
+<% end %>
