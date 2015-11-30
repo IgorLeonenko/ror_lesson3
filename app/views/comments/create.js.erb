@@ -6,4 +6,6 @@
   $(".comments-post-<%= @post.id %>").append("<%= j render partial: 'comments/comment', locals: { comment: @comment, post: @post } %>").hide().fadeIn(1500);
   $("#new-comment-<%= @post.id %>").hide();
   $("#new-comment-<%= @post.id %> form")[0].reset();
+  $("#new-comment-<%= @post.id %> form .form-group").removeClass('has-error');
+  $("#new-comment-<%= @post.id %> form .help-inline").html("");
 <% end %>
