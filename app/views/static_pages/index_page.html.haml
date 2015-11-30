@@ -11,3 +11,8 @@
     = render partial: "posts/post", locals: { :post => post }
   - unless params[:active].present?
     = paginate @posts, :theme => 'twitter-bootstrap-3', :pagination_class => 'pagination-sm' if current_user
+
+:javascript
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });

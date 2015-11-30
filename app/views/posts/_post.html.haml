@@ -54,8 +54,3 @@
   .col-md-6{ style: "margin-bottom: 10px", id: "new-comment-#{post.id}",class: "comment-form" }
     = form_for [current_user, post, @comment], remote: true do |f|
       = render partial: "comments/form", locals: { f: f, post: post, c: @comment }
-
-:javascript
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  });
