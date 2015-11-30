@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      cookies[:user_id] = { value: "#{@user.id}", expires: 12.hours.from_now }
+      session[:user_id] = @user.id
       flash[:notice] = 'User created successfully!'
       redirect_to @user
     else
