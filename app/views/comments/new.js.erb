@@ -1,0 +1,6 @@
+<% if params[:parent_id].present? %>
+  <% comment = params[:parent_id] %>
+  $("#comment-<%= comment %>").after("<%= j render 'form' %>");
+<% else %>
+  $("#post-<%= @post.id %> .comment-form").html("<%= j render 'form' %>");
+<% end %>

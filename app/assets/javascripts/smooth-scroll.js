@@ -70,7 +70,7 @@ ready = function() {
             anchor = anchor.offsetParent;
           } while (anchor);
         }
-        return distance - headerHeight - 150;
+        return distance - headerHeight - 70;
       };
       var distance = endLocation(anchor) - startLocation;
       var increments = distance / (duration / 16);

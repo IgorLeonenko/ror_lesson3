@@ -1,0 +1,4 @@
+.col-md-1{ id: "new-comment-#{@post.id}" }
+.col-md-6{ style: "margin-bottom: 10px", id: "new-comment-#{@post.id}" }
+  = form_for [current_user, @post, @comment], remote:true do |f|
+    = render partial: "form", locals: { f: f, post: @post, c: @comment }

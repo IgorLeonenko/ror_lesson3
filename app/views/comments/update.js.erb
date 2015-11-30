@@ -1,7 +1,7 @@
 <% if @comment.errors.any? %>
-  $("#update-comment-<%= @comment.id %> form .help-inline").html("<%= raw @comment.errors.full_messages.join(', ') %>");
-  $("#update-comment-<%= @comment.id %> form .form-group").addClass('has-error');
+  $("#edit_comment_<%= @comment.id %> .help-inline").html("<%= raw @comment.errors.full_messages.join(', ') %>");
+  $("#edit_comment_<%= @comment.id %> .form-group").addClass('has-error');
 <% else %>
-  $("#close-comment-<%= @comment.id %>").html("<%= j render partial: 'comments/comment', locals: { comment: @comment, post: @post } %>").hide().fadeIn(1500);
-  $("#update-comment-<%= @comment.id %>").hide();
+  $("#comment-<%= @comment.id %>").html("<%= j render partial: 'comments/comment', locals: { comment: @comment, post: @post } %>").hide().fadeIn(1500);
+  $("#edit_comment_<%= @comment.id %>").remove();
 <% end %>

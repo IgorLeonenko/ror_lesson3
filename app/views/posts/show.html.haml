@@ -19,7 +19,7 @@
   .row
     .col-md-12
       - if current_user
-        = link_to ' comment', "#new-comment-#{@post.id}", class: "scroll comment-#{@post.id} fa fa-comments-o btn btn-info", onclick: "$('#new-comment-#{@post.id}').show();", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+        = link_to ' comment', new_user_post_comment_path(current_user, @post, parent_id: @comment), remote: true, class: "fa fa-comments-o btn btn-info"
       - if current_user && @post.user_id == current_user.id
         = link_to ' edit', edit_user_post_path(current_user.id, @post), class: "btn btn-info fa fa-file-text"
       = link_to ' back', :back, class: "btn btn-info fa fa-circle-o-notch"
@@ -34,19 +34,10 @@
           %a.btn.btn-danger
             %span.fa.fa-thumbs-down.text-danger
             = like_dislike(like=false, @post)
-  .row{ class: "comments" }
-    .col-md-8{ class: "comments-post-#{@post.id}" }
-      %h4
-        - if @post.comments.any?
-          Comments:
-      - @post.comments.each do |comment|
-        = render partial: 'comments/comment', locals: { comment: comment, post: @post }
-  - if current_user
-    .row{ id: "new-comment-#{@post.id}", class: "comment-form" }
-      .col-md-1
-      .col-md-6
-        = form_for [current_user, @post, @comment], remote: true do |f|
-          = render partial: "comments/form", locals: { :f => f, post: @post, c: @comment }
+  .row{ class: "comments", id: "post-#{@post.id}" }
+    .col-md-10{ class: "comments-post-#{@post.id}" }
+      = nested_comments @post.comments.arrange
+    .comment-form{ id: "comment-form-#{@post.id}" }
 
 :javascript
   $(function () {

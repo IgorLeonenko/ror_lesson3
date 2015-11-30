@@ -99,7 +99,7 @@ footer {
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
+textarea, select, .uneditable-input {
   width: 100%;
   margin-bottom: 2px;
   @include box_sizing;
@@ -174,14 +174,11 @@ aside {
   }
 }
 
-.comment-form {
-  display:none;
-}
-
 .comment {
   margin-bottom: 10px;
   .media{
     padding-bottom: 10px;
+    border-left: 4px solid grey;
   }
   img {
     width: 50px;
@@ -226,4 +223,8 @@ a.btn-xs:visited{
   position: fixed;
   top: 85%;
   left: 95%;
+}
+
+.nested {
+  margin-left: 30px;
 }

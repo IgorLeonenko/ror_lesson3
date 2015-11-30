@@ -1,10 +1,12 @@
-.form-group
-  = f.text_area :body, rows: 5, placeholder: 'add comment here. minimum 100 chars', class: "form-control"
-  %span.help-inline
-.col-md-3
-  = f.submit "#{ c.persisted? ? 'Update' : 'Comment'}", class: "btn btn-success"
-.col-md-3
-  -if c.persisted?
-    = link_to 'Cancel',  "#close-comment-#{c.id}", class: " scroll btn btn-danger", onclick:"$('#update-comment-#{c.id}').hide(); $('#update-comment-#{c.id} span').remove(); $('#update-comment-#{c.id} form .form-group').removeClass('has-error');", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
-  - else
-    = link_to 'Cancel',  "#post-#{post.id}", class: " scroll btn btn-danger", onclick:"$('#new-comment-#{post.id}').hide(); $('#new-comment-#{post.id} span').remove(); $('#new-comment-#{post.id} form .form-group').removeClass('has-error');", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+.col-md-12{ id: "new-comment-#{@post.id}" }
+  .col-md-8{ style: "margin-bottom: 10px" }
+    = form_for [current_user, @post, @comment], remote:true do |f|
+      .form-group
+        = f.hidden_field :parent_id
+        = f.text_area :body, rows: 5, placeholder: 'add comment here. minimum 100 chars', class: "form-control"
+        %span.help-inline
+      = f.submit "#{ @comment.persisted? ? 'Update' : 'Comment'}", class: "btn btn-md btn-success"
+      - if @comment.persisted?
+        = link_to 'Cancel', "#comment-#{@comment.id}", onclick: "$('#new-comment-#{@post.id} #edit_comment_#{@comment.id}').remove();", class: 'scroll btn btn-md btn-danger', 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+      - else
+        = link_to 'Cancel', "#post-anchor-#{@post.id}", onclick: "$('#new-comment-#{@post.id} #new_comment').remove();", class: 'scroll btn btn-md btn-danger', 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
