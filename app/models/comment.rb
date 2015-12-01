@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  has_ancestry
+  has_ancestry cache_depth: true
 
   belongs_to :user
   belongs_to :post
