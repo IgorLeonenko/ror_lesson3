@@ -10,7 +10,7 @@
     %span#top
     = render 'layouts/header'
     .container{style:"min-height: 560px;"}
-      = link_to ' top', '#top', class: 'scroll btn btn-info top-button fa fa-arrow-up', 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+      = link_to ' top', '#top', class: 'btn btn-info top-button fa fa-arrow-up', onclick: "$('html, body').animate({ scrollTop: $('#top').offset().top - 70 }, 1500);"
       - if session[:modal] == 1
         = render 'shared/changes_modal'
       - if session[:count] == 10

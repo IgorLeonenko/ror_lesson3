@@ -13,13 +13,13 @@
     .media-body
       = comment.body
       - if current_user
-        = link_to ' reply', new_user_post_comment_path(current_user, comment.post, parent_id: comment), remote: true
+        = link_to ' reply', new_user_post_comment_path(current_user, comment.post, parent_id: comment), onclick: "$(this).hide()", remote: true, id: "replay-#{comment.id}"
       - if current_user && current_user.id == comment.user.id
         %p
           %span.clock{ class: "update-comment-#{comment.id}" }
           %br/
-          = link_to ' edit', edit_user_post_comment_path(current_user, comment.post, comment), class: "update-comment-#{comment.id} btn btn-sm btn-info fa fa-file-text", 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true, remote: true
-    .edit-form
+          = link_to ' edit', edit_user_post_comment_path(current_user, comment.post, comment), class: "update-comment-#{comment.id} btn btn-sm btn-info fa fa-file-text", remote: true
+    %div{ class: "edit-form-#{comment.id}" }
 
 :javascript
   $("span.clock.update-comment-#{comment.id}").countdown("#{ comment.created_at + 5.minute }").on('update.countdown', function(event) {

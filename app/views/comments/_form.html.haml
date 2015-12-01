@@ -7,6 +7,19 @@
         %span.help-inline
       = f.submit "#{ @comment.persisted? ? 'Update' : 'Comment'}", class: "btn btn-md btn-success"
       - if @comment.persisted?
-        = link_to 'Cancel', "#comment-#{@comment.id}", onclick: "$('#new-comment-#{@post.id} #edit_comment_#{@comment.id}').remove();", class: 'scroll btn btn-md btn-danger', 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+        = link_to 'Cancel', "#comment-#{@comment.id}", onclick: "$('html, body').animate({ scrollTop: $('#comment-#{@comment.id}').offset().top - 70 }, 1500);$('#new-comment-#{@post.id} #edit_comment_#{@comment.id}').remove();", class: 'btn btn-md btn-danger'
       - else
-        = link_to 'Cancel', "#post-anchor-#{@post.id}", onclick: "$('#new-comment-#{@post.id} #new_comment').remove();", class: 'scroll btn btn-md btn-danger', 'data-speed': 2000, 'data-easing': 'easeOutQuint', 'data-url': true
+        = link_to 'Cancel', params[:parent_id].present? ? "#comment-#{params[:parent_id]}" : "#post-#{@post.id}", class: "btn btn-md btn-danger cancel-comment-#{@post.id}"
+
+:javascript
+  $(".cancel-comment-#{@post.id}").click(function() {
+    var target = $(this.hash);
+    target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+    if (target.length) {
+      $('html,body').animate({
+        scrollTop: target.offset().top - 70
+      }, 1500);
+    };
+    $("#new-comment-#{@post.id}").remove();
+    $("#replay-#{params[:parent_id]}").show();
+  });

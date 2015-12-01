@@ -1,6 +1,12 @@
 <% if params[:parent_id].present? %>
   <% comment = params[:parent_id] %>
   $("#comment-<%= comment %>").after("<%= j render 'form' %>");
+  $('html, body').animate({
+      scrollTop: $("#new-comment-<%= @post.id %>").offset().top - 70
+    }, 1500);
 <% else %>
   $("#post-<%= @post.id %> .comment-form").html("<%= j render 'form' %>");
+  $('html, body').animate({
+      scrollTop: $("#new-comment-<%= @post.id %>").offset().top - 70
+    }, 1500);
 <% end %>

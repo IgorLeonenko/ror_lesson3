@@ -1,1 +1,4 @@
-$("#comment-<%= @comment.id %> .edit-form").html("<%= j render 'form' %>");
+$("#comment-<%= @comment.id %> .edit-form-<%= @comment.id %>").html("<%= j render 'form' %>");
+$('html, body').animate({
+  scrollTop: $(".edit-form-<%= @comment.id %>").offset().top - 70
+}, 1500);

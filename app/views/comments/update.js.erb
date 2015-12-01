@@ -4,4 +4,7 @@
 <% else %>
   $("#comment-<%= @comment.id %>").html("<%= j render partial: 'comments/comment', locals: { comment: @comment, post: @post } %>").hide().fadeIn(1500);
   $("#edit_comment_<%= @comment.id %>").remove();
+  $('html, body').animate({
+      scrollTop: $("#comment-<%= @comment.id %>").offset().top - 70
+    }, 1500);
 <% end %>
