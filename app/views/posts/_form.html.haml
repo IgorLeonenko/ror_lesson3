@@ -9,7 +9,7 @@
 .form-group{ class: "#{@post.errors.get(:tags).present? ? 'has-error' : ''}"}
   = f.label :tag_list, "Tags", class: 'control-label'
   %br/
-  = f.text_field :tag_list, class: "form-control", placeholder: "Separated by commas. No more than 5"
+  = f.text_field :tag_list, value: "#{ @post.tag_list.join(',') }", class: "form-control", placeholder: "Separated by commas. No more than 5"
   - if @post.errors.get(:tags).present?
     %span.help-inline
       = @post.errors.get(:tags).join('')
